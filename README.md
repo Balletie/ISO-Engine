@@ -1,3 +1,3 @@
 #ISO-Engine
 
-Some isometric-tile engine.
+Some isometric tile engine.
