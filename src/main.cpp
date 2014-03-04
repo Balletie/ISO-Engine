@@ -49,12 +49,6 @@ int main(int, char const**) {
                 int x = (window.getSize().x/2 - 10 * 64 / 2) + World::rowcol_to_x(i,j);
                 int y = (window.getSize().y/2 - 16)          + World::rowcol_to_y(i,j);
 
-                if (y - current.y_offset < 0) {
-                    sp.setTextureRect(IntRect(0, current.y_offset,64,32));
-                    sp.setColor(Color(255,200,200));
-                    current.y_offset = 0;
-                }
-
                 sp.setPosition(x, y - current.y_offset);
                 window.draw(sp);
             }
