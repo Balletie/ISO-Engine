@@ -27,10 +27,11 @@ World::World(tex* tex_data) : texture_data(tex_data), dimension(10) {
     world_data[22] = {&(tex_data->sand),30};
     world_data[67] = {&(tex_data->sand),30};
     world_data[68] = {&(tex_data->sand),30};
+    world_data[53] = {NULL, 0};
 }
 
 Sprite World::getSprite(tile a) {
-    return Sprite(*a.texture);
+    return a.texture != NULL ? Sprite(*a.texture) : Sprite();
 }
 
 void World::draw(RenderWindow& window){
