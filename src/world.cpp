@@ -10,7 +10,7 @@
 #include <iostream>
 #include <algorithm>
 using sf::Sprite;
-using sf::Color;
+using sf::RenderWindow;
 
 World::World(tex* tex_data) : texture_data(tex_data), dimension(10) {
     tile gr = {&(tex_data->grass),27};
@@ -31,6 +31,21 @@ World::World(tex* tex_data) : texture_data(tex_data), dimension(10) {
 
 Sprite World::getSprite(tile a) {
     return Sprite(*a.texture);
+}
+
+void World::draw(RenderWindow& window){
+    for (int i = 0; i < this->dimension; i++) {
+        for (int j = this->dimension - 1; j >= 0; j--) {
+            tile current = this->world_data[i*10 + j];
+            Sprite sp = this->getSprite(current);
+
+            int x = (window.getSize().x/2 - 10 * 64 / 2) + rowcol_to_x(i,j);
+            int y = (window.getSize().y/2 - 16)          + rowcol_to_y(i,j);
+
+            sp.setPosition(x, y - current.y_offset);
+            window.draw(sp);
+        }
+    }
 }
 
 int World::rowcol_to_x(int row, int col) {

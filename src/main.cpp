@@ -41,18 +41,7 @@ int main(int, char const**) {
             }
         }
         window.clear();
-        for (int i = 0; i < world.dimension; i++) {
-            for (int j = world.dimension - 1; j >= 0; j--) {
-                tile current = world.world_data[i*10 + j];
-                Sprite sp = world.getSprite(current);
-
-                int x = (window.getSize().x/2 - 10 * 64 / 2) + World::rowcol_to_x(i,j);
-                int y = (window.getSize().y/2 - 16)          + World::rowcol_to_y(i,j);
-
-                sp.setPosition(x, y - current.y_offset);
-                window.draw(sp);
-            }
-        }
+        world.draw(window);
         window.display();
     }
     return EXIT_SUCCESS;

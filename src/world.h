@@ -10,15 +10,20 @@
 #define __iso_engine__world__
 
 #include <array>
+#include <SFML/Graphics.hpp>
 #include "tile.h"
 using namespace std;
 
 class World {
+
   public:
     tex* texture_data;
     const int dimension;
     array<tile, 100> world_data;
     World(tex*);
+    void draw(sf::RenderWindow& window);
+
+  private:
     sf::Sprite getSprite(tile);
     static int rowcol_to_x(int, int);
     static int rowcol_to_y(int, int);
