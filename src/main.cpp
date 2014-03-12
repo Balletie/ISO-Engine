@@ -6,7 +6,6 @@
 #include "world.h"
 
 using namespace std;
-using namespace sf;
 
 bool load_textures(tex* tex) {
     if(!(tex->grass   .loadFromFile(resourcePath() + "grass.png")    &&
@@ -19,24 +18,24 @@ bool load_textures(tex* tex) {
     return true;
 }
 
-void handle_keys(RenderWindow& window, float dt) {
-    if(Keyboard::isKeyPressed(Keyboard::Left)) {
-        View temp = window.getView();
+void handle_keys(sf::RenderWindow& window, float dt) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        sf::View temp = window.getView();
         temp.move(-2 * dt/1000, 0);
         window.setView(temp);
     }
-    if(Keyboard::isKeyPressed(Keyboard::Right)) {
-        View temp = window.getView();
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        sf::View temp = window.getView();
         temp.move(2 * dt/1000, 0);
         window.setView(temp);
     }
-    if(Keyboard::isKeyPressed(Keyboard::Up)) {
-        View temp = window.getView();
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        sf::View temp = window.getView();
         temp.move(0, -2 * dt/1000);
         window.setView(temp);
     }
-    if(Keyboard::isKeyPressed(Keyboard::Down)) {
-        View temp = window.getView();
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        sf::View temp = window.getView();
         temp.move(0, 2 * dt/1000);
         window.setView(temp);
     }
@@ -49,25 +48,27 @@ int main(int, char const**) {
         return EXIT_FAILURE;
     }
 
-    World world(&textures);
-    RenderWindow window(VideoMode(world.dimension * 64, world.dimension * 32), "ISO-Engine");
+    World world(textures);
+    sf::RenderWindow window(sf::VideoMode(world.dimension * 64, world.dimension * 32), "ISO-Engine");
 
-    Clock clock;
+    sf::Clock clock;
+
     while (window.isOpen()) {
-        Time elapsed = clock.restart();
-        Event event;
-        handle_keys(window, elapsed.asMicroseconds());
+        sf::Time dt = clock.restart();
+        handle_keys(window, dt.asMicroseconds());
+
+        sf::Event event;
         while (window.pollEvent(event)) {
-            if (event.type == Event::Closed) {
+            if (event.type == sf::Event::Closed) {
                 window.close();
             }
 
-            if (event.type == Event::KeyPressed) {
+            if (event.type == sf::Event::KeyPressed) {
                 switch(event.key.code) {
-                    case Keyboard::Escape:
+                    case sf::Keyboard::Escape:
                         window.close();
                         break;
-                    case Keyboard::Num0:
+                    case sf::Keyboard::Num0:
                         window.setView(window.getDefaultView());
                         break;
                     default:

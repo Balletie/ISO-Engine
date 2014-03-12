@@ -9,18 +9,18 @@
 #ifndef __iso_engine__world__
 #define __iso_engine__world__
 
-#include <array>
-#include <SFML/Graphics.hpp>
+#include <vector>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "tile.h"
-using namespace std;
 
 class World {
 
   public:
-    tex* texture_data;
+    tex& texture_data;
     const int dimension;
-    array<tile, 100> world_data;
-    World(tex*);
+    std::vector<tile> world_data;
+    World(tex&);
     void draw(sf::RenderWindow& window);
 
   private:
