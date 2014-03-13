@@ -1,7 +1,9 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "ResourcePath.hpp"
+#if defined(SFML_SYSTEM_MACOS)
+    #include "ResourcePath.hpp"
+#endif
 #include "tile.h"
 #include "world.h"
 
