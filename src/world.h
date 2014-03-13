@@ -12,14 +12,13 @@
 #include <vector>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "tile.h"
+#include "layer.h"
 
 class World {
-
   public:
     tex& texture_data;
     const int dimension;
-    std::vector<tile> world_data;
+    std::vector<layer> world_data;
     World(tex&);
     void draw(sf::RenderWindow& window);
 

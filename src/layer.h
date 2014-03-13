@@ -9,6 +9,10 @@
 #ifndef __iso_engine__layer__
 #define __iso_engine__layer__
 
-#include <iostream>
+#include "tile.h"
+
+struct layer {
+    std::vector<std::vector<tile>> layer_data;
+};
 
 #endif /* defined(__iso_engine__layer__) */
