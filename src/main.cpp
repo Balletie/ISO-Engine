@@ -8,33 +8,33 @@
 using namespace std;
 
 bool load_textures(tex* tex) {
-    if(!(tex->grass   .loadFromFile(resourcePath() + "grass.png")    &&
-         tex->water   .loadFromFile(resourcePath() + "water.png")    &&
-         tex->sand    .loadFromFile(resourcePath() + "sand.png")     &&
-         tex->building.loadFromFile(resourcePath() + "building.png") &&
-         tex->shallow .loadFromFile(resourcePath() + "shallow.png")  )) {
+    if (!(tex->grass   .loadFromFile(resourcePath() + "grass.png")    &&
+          tex->water   .loadFromFile(resourcePath() + "water.png")    &&
+          tex->sand    .loadFromFile(resourcePath() + "sand.png")     &&
+          tex->building.loadFromFile(resourcePath() + "building.png") &&
+          tex->shallow .loadFromFile(resourcePath() + "shallow.png")  )) {
         return false;
     }
     return true;
 }
 
 void handle_keys(sf::RenderWindow& window, float dt) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         sf::View temp = window.getView();
         temp.move(-2 * dt/1000, 0);
         window.setView(temp);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         sf::View temp = window.getView();
         temp.move(2 * dt/1000, 0);
         window.setView(temp);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         sf::View temp = window.getView();
         temp.move(0, -2 * dt/1000);
         window.setView(temp);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         sf::View temp = window.getView();
         temp.move(0, 2 * dt/1000);
         window.setView(temp);

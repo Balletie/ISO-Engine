@@ -25,8 +25,6 @@ class World {
 
   private:
     sf::Sprite getSprite(tile);
-    static int rowcol_to_x(int, int);
-    static int rowcol_to_y(int, int);
 };
 
 #endif /* defined(__iso_engine__world__) */

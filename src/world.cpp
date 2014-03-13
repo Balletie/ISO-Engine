@@ -9,12 +9,9 @@
 #include "world.h"
 #include <iostream>
 
-World::World(tex& tex_data) : texture_data(tex_data),
-                              world_data(100, {
-                                                &(texture_data.grass),  //The texture address
-                                                27                      //The y_offset
-                                              }),
-                              dimension(10)
+World::World(tex& tex_data) : texture_data(tex_data)
+                            , world_data(100, {&(texture_data.grass), 27})
+                            , dimension(10)
 {}
 
 sf::Sprite World::getSprite(tile a) {
@@ -34,12 +31,4 @@ void World::draw(sf::RenderWindow& window){
             window.draw(sp);
         }
     }
-}
-
-int World::rowcol_to_x(int row, int col) {
-    return col * 32 + row * 32;
-}
-
-int World::rowcol_to_y(int row, int col) {
-    return row * 16 - col * 16;
 }
