@@ -12,7 +12,11 @@ World::World(tex& tex_data) : texture_data(tex_data)
                             //next line creates one layer, initialized with grass tiles
                             , world_data(1, {std::vector<std::vector<tile>>(10, std::vector<tile>(10,{&(texture_data.grass), 27}))})
                             , dimension(10)
-{}
+{
+    std::vector<std::vector<tile>> temp(10, std::vector<tile>(10));
+    temp[4][3] = {&(texture_data.building), 40};
+    world_data.push_back({temp});
+}
 
 sf::Sprite World::getSprite(tile a) {
     return a.texture != nullptr ? sf::Sprite(*a.texture) : sf::Sprite();
