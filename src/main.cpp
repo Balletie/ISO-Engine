@@ -51,7 +51,7 @@ int main(int, char const**) {
     }
 
     World world(textures);
-    sf::RenderWindow window(sf::VideoMode(world.dimension * 64, world.dimension * 32), "ISO-Engine");
+    sf::RenderWindow window(sf::VideoMode(world.dimension * 128, world.dimension * 64), "ISO-Engine");
 
     sf::Clock clock;
 
@@ -73,6 +73,18 @@ int main(int, char const**) {
                     case sf::Keyboard::Num0:
                         window.setView(window.getDefaultView());
                         break;
+                    case sf::Keyboard::Z:{
+                        sf::View temp = window.getView();
+                        temp.zoom(0.8);
+                        window.setView(temp);
+                        break;
+                    }
+                    case sf::Keyboard::X:{
+                        sf::View temp = window.getView();
+                        temp.zoom(1.2);
+                        window.setView(temp);
+                        break;
+                    }
                     default:
                         break;
                 }
