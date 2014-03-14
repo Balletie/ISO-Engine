@@ -8,10 +8,10 @@
 
 #include "tile.h"
 
-int rowcol_to_x(int row, int col) {
-    return col * 32 + row * 32;
+int rowcol_to_x(int row, int col, int width) {
+    return col * width/2 + row * width/2;
 }
 
-int rowcol_to_y(int row, int col) {
-    return row * 16 - col * 16;
+int rowcol_to_y(int row, int col, int height) {
+    return row * height/2 - col * height/2;
 }

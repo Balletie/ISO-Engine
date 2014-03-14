@@ -21,6 +21,6 @@ struct tile {
     int y_offset;
 };
 
-int rowcol_to_x(int, int);
-int rowcol_to_y(int, int);
+int rowcol_to_x(int, int, int);
+int rowcol_to_y(int, int, int);
 #endif

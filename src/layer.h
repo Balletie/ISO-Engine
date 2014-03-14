@@ -13,6 +13,8 @@
 
 struct layer {
     std::vector<std::vector<tile>> layer_data;
+    int tile_height;
+    int tile_width;
 };
 
 #endif /* defined(__iso_engine__layer__) */
