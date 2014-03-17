@@ -23,4 +23,6 @@ struct tile {
 
 int rowcol_to_x(int, int, int);
 int rowcol_to_y(int, int, int);
+int xy_to_col(int, int, int);
+int xy_to_row(int, int, int);
 #endif
