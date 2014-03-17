@@ -7,7 +7,6 @@
 //
 
 #include "tile.h"
-#include <math.h>
 
 int rowcol_to_x(int row, int col, int width) {
     return col * width/2 + row * width/2;
