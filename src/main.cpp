@@ -76,7 +76,6 @@ int main(int, char const**) {
                         int row = xy_to_row(coord.x, coord.y, 32);
                         int col = xy_to_col(coord.x, coord.y, 32);
                         world.world_data[0].layer_data[row][col].texture = &(world.texture_data.sand);
-                        std::cout<<row<<", "<<col<<std::endl;
                         break;
                     }
                     default:
