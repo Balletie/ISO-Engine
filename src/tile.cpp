@@ -18,9 +18,9 @@ int rowcol_to_y(int row, int col, int height) {
 }
 
 int xy_to_row(float x, float y, int height) {
-    return (int)((y - 16) / height + (x - 16) / (2 * height));
+    return (int)((y - height/2) / height + (x - height/2) / (2 * height));
 }
 
 int xy_to_col(float x, float y, int height) {
-    return (int)((x - 16) / (2 * height) - (y - 16) / height);
+    return (int)((x - height/2) / (2 * height) - (y - height/2) / height);
 }
