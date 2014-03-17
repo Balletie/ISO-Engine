@@ -30,11 +30,10 @@ void World::draw(sf::RenderWindow& window) {
             for (int l = 0; l < world_data.size(); l++) {
                 tile current    = this->world_data[l].layer_data[i][j];
                 int tile_height = this->world_data[l].tile_height;
-                int tile_width  = tile_height << 1;
                 sf::Sprite sp   = this->getSprite(current);
 
-                int x = (window.getSize().x/2 - 10 * 64 / 2) + rowcol_to_x(i,j, tile_width);
-                int y = (window.getSize().y/2 - 16)          + rowcol_to_y(i,j, tile_height);
+                int x = rowcol_to_x(i,j, tile_height * 2);
+                int y = rowcol_to_y(i,j, tile_height);
 
                 sp.setPosition(x, y - current.y_offset);
                 window.draw(sp);
