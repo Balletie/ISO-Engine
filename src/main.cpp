@@ -64,9 +64,24 @@ int main(int, char const**) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-
+            if (event.type == sf::Event::MouseButtonPressed) {
+                switch (event.mouseButton.button) {
+                    case sf::Mouse::Left:{
+                        sf::Vector2i coord = sf::Mouse::getPosition(window);
+                        int row = xy_to_row(coord.x - (window.getSize().x/2 - 10 * 64 / 2),
+                                            coord.y - (window.getSize().y/2 - 16), 32);
+                        int col = xy_to_col(coord.x - (window.getSize().x/2 - 10 * 64 / 2),
+                                            coord.y - (window.getSize().y/2 - 16), 32);
+                        world.world_data[0].layer_data[row][col].texture = &(world.texture_data.sand);
+                        std::cout<<row<<", "<<col<<std::endl;
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
             if (event.type == sf::Event::KeyPressed) {
-                switch(event.key.code) {
+                switch (event.key.code) {
                     case sf::Keyboard::Escape:
                         window.close();
                         break;
