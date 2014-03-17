@@ -52,6 +52,7 @@ int main(int, char const**) {
 
     World world(textures);
     sf::RenderWindow window(sf::VideoMode(world.dimension * 64, world.dimension * 32), "ISO-Engine");
+    window.setFramerateLimit(60);
 
     sf::View middleView = window.getDefaultView();
     middleView.move(0, -((int)window.getSize().y)/2 + 16);
