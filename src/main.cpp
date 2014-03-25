@@ -51,11 +51,11 @@ int main(int, char const**) {
     }
 
     World world(textures);
-    sf::RenderWindow window(sf::VideoMode(world.dimension * 64, world.dimension * 32), "ISO-Engine");
+    sf::RenderWindow window(sf::VideoMode(world.dimension * 128, world.dimension * 64), "ISO-Engine");
     window.setFramerateLimit(60);
 
     sf::View middleView = window.getDefaultView();
-    middleView.move(0, -((int)window.getSize().y)/2 + 16);
+    middleView.move(-((int)window.getSize().x/2 - 10 * 64 / 2), -((int)window.getSize().y)/2 + 16);
     window.setView(middleView);
 
     sf::Clock clock;
@@ -75,7 +75,7 @@ int main(int, char const**) {
                         sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
                         int row = xy_to_row(coord.x, coord.y, 32);
                         int col = xy_to_col(coord.x, coord.y, 32);
-                        world.world_data[0].layer_data[row][col].texture = &(world.texture_data.sand);
+                        world.world_data[0].layer_data[row][col] = {&(world.texture_data.sand), 30};
                         break;
                     }
                     default:
