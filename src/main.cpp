@@ -1,13 +1,10 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <string>
 #if defined(SFML_SYSTEM_MACOS)
     #include "OSX/ResourcePath.hpp"
 #elif defined(SFML_SYSTEM_LINUX)
-std::string resourcePath() {
-    return "assets/";
-}
+    #include "Linux/resource.h"
 #endif
 #include "tile.h"
 #include "world.h"
