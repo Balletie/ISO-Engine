@@ -12,7 +12,7 @@
 #include "tile.h"
 
 struct layer {
-    std::vector<std::vector<tile>> layer_data;
+    std::vector<std::vector<tile> > layer_data;
     int tile_height;
 };
 

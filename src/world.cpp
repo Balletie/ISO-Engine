@@ -10,7 +10,7 @@
 
 World::World(tex& tex_data) : texture_data(tex_data)
                             //next line creates one layer, initialized with grass tiles
-                            , world_data(1, {std::vector<std::vector<tile>>(10, std::vector<tile>(10,{&(texture_data.grass), 27})), 32})
+                            , world_data(1, {std::vector<std::vector<tile> >(10, std::vector<tile>(10,{&(texture_data.grass), 27})), 32})
                             , dimension(10)
 {
     std::vector<std::vector<tile>> temp(10, std::vector<tile>(10));
