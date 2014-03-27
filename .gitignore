@@ -1,3 +1,5 @@
 iso-engine-Info.plist
 *.gch
 *.o
+*.swp
+iso
