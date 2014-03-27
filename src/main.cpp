@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #if defined(SFML_SYSTEM_MACOS)
-    #include "ResourcePath.hpp"
+    #include "OSX/ResourcePath.hpp"
 #endif
 #include "tile.h"
 #include "world.h"
