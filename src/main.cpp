@@ -54,7 +54,7 @@ int main(int, char const**) {
     }
 
     World world(textures);
-    sf::RenderWindow window(sf::VideoMode(world.dimension * 128, world.dimension * 64), "ISO-Engine");
+    sf::RenderWindow window(sf::VideoMode::getFullscreenModes()[0], "ISO-Engine", sf::Style::Fullscreen);
     window.setFramerateLimit(60);
 
     sf::View middleView = window.getDefaultView();

@@ -9,11 +9,11 @@
 #include "world.h"
 
 World::World(tex& tex_data) : texture_data(tex_data)
-                            , world_data(1, Layer(10, 10))
-                            , dimension(10)
+                            , dimension(100)
+                            , world_data(1, Layer(dimension, dimension))
 {
     world_data[0].fill({&(texture_data.grass), 27});
-    world_data.push_back(Layer(10, 10));
+    world_data.push_back(Layer(dimension, dimension));
     world_data[1][3][3] = {&(texture_data.building), 40};
 }
 
