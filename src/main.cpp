@@ -76,8 +76,8 @@ int main(int, char const**) {
                 switch (event.mouseButton.button) {
                     case sf::Mouse::Left:{
                         sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-                        int row = xy_to_row(coord.x, coord.y, 32);
-                        int col = xy_to_col(coord.x, coord.y, 32);
+                        int row = tile::xy_to_row(coord.x, coord.y, 32);
+                        int col = tile::xy_to_col(coord.x, coord.y, 32);
                         world.world_data[0][row][col] = {&(world.texture_data.sand), 30};
                         break;
                     }

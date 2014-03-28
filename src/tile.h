@@ -19,37 +19,38 @@ struct tex {
 struct tile {
     sf::Texture* texture;
     int y_offset;
+
+    /////////////////////////////////////////////////
+    /// \brief Convert to standard basis
+    ///
+    /// Using the following matrix transformation:
+    ///
+    /// [  h    h  ] [ row ] -> [ x ]
+    /// [ h/2 -h/2 ] [ col ] -> [ y ]
+    ///
+    /// The column vectors form the isometric basis
+    /// representing the coordinate system.
+    ///
+    /// \see rowcol_to_y
+    /////////////////////////////////////////////////
+    static int rowcol_to_x(int, int, int);
+    static int rowcol_to_y(int, int, int);
+
+    /////////////////////////////////////////////////
+    /// \brief Convert to isometric basis
+    ///
+    /// Using the following matrix transformation:
+    ///
+    /// [ 1/2h  1/h ] [ x ] -> [ row ]
+    /// [ 1/2h -1/h ] [ y ] -> [ col ]
+    ///
+    /// This matrix is the inverse of the previous
+    /// matrix.
+    ///
+    /// \see xy_to_row
+    /////////////////////////////////////////////////
+    static int xy_to_col(float, float, float);
+    static int xy_to_row(float, float, float);
+
 };
-
-/////////////////////////////////////////////////
-/// \brief Convert to standard basis
-///
-/// Using the following matrix transformation:
-///
-/// [  h    h  ] [ row ] -> [ x ]
-/// [ h/2 -h/2 ] [ col ] -> [ y ]
-///
-/// The column vectors form the isometric basis
-/// representing the coordinate system.
-///
-/// \see rowcol_to_y
-/////////////////////////////////////////////////
-int rowcol_to_x(int, int, int);
-int rowcol_to_y(int, int, int);
-
-/////////////////////////////////////////////////
-/// \brief Convert to isometric basis
-///
-/// Using the following matrix transformation:
-///
-/// [ 1/2h  1/h ] [ x ] -> [ row ]
-/// [ 1/2h -1/h ] [ y ] -> [ col ]
-///
-/// This matrix is the inverse of the previous
-/// matrix.
-///
-/// \see xy_to_row
-/////////////////////////////////////////////////
-int xy_to_col(float, float, float);
-int xy_to_row(float, float, float);
 #endif

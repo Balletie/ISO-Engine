@@ -29,8 +29,8 @@ void World::draw(sf::RenderWindow& window) {
                 int tile_height = this->world_data[l].tile_height;
                 sf::Sprite sp   = this->getSprite(current);
 
-                int x = rowcol_to_x(i,j, tile_height);
-                int y = rowcol_to_y(i,j, tile_height);
+                int x = tile::rowcol_to_x(i,j, tile_height);
+                int y = tile::rowcol_to_y(i,j, tile_height);
 
                 sp.setPosition(x, y - current.y_offset);
                 window.draw(sp);
