@@ -9,15 +9,12 @@
 #include "world.h"
 
 World::World(tex& tex_data) : texture_data(tex_data)
-                            //next line creates one layer, initialized with grass tiles
-                            , world_data(1, {std::vector<std::vector<tile> >(10, std::vector<tile>(10,{&(texture_data.grass), 27})), 32})
+                            , world_data(1, Layer(10, 10))
                             , dimension(10)
 {
-    std::vector<std::vector<tile>> temp(10, std::vector<tile>(10));
-    temp[3][3] = {&(texture_data.building), 40};
-    temp[4][3] = {&(texture_data.building), 40};
-    temp[5][3] = {&(texture_data.building), 40};
-    world_data.push_back({temp, 32});
+    world_data[0].fill({&(texture_data.grass), 27});
+    world_data.push_back(Layer(10, 10));
+    world_data[1][3][3] = {&(texture_data.building), 40};
 }
 
 sf::Sprite World::getSprite(tile a) {
@@ -28,7 +25,7 @@ void World::draw(sf::RenderWindow& window) {
     for (int i = 0; i < dimension; i++) {
         for (int j = dimension - 1; j >= 0; j--) {
             for (int l = 0; l < world_data.size(); l++) {
-                tile current    = this->world_data[l].layer_data[i][j];
+                tile current    = this->world_data[l][i][j];
                 int tile_height = this->world_data[l].tile_height;
                 sf::Sprite sp   = this->getSprite(current);
 

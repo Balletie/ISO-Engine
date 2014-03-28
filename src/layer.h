@@ -11,9 +11,15 @@
 
 #include "tile.h"
 
-struct layer {
+class Layer {
+  private:
     std::vector<std::vector<tile> > layer_data;
-    int tile_height;
+  public:
+    const int tile_height;
+    Layer(int, int, int height = 32);
+    void fill(tile t);
+    std::vector<tile>& operator [](int i);
+    std::vector<tile>  operator [](int i) const;
 };
 
 #endif /* defined(__iso_engine__layer__) */

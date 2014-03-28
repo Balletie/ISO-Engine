@@ -18,7 +18,7 @@ class World {
   public:
     tex& texture_data;
     const int dimension;
-    std::vector<layer> world_data;
+    std::vector<Layer> world_data;
     World(tex&);
     void draw(sf::RenderWindow& window);
 
