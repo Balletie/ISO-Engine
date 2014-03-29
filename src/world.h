@@ -11,16 +11,18 @@
 
 #include <vector>
 #include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
 #include "layer.h"
 
 class World {
   public:
     tex& texture_data;
-    const int dimension;
+    int x;
+    int y;
     std::vector<Layer> world_data;
-    World(tex&);
-    void draw(sf::RenderWindow& window);
+    World(tex&, int, int);
+    void newLayer(int, int);
+    void draw(sf::RenderTexture& texture);
 
   private:
     sf::Sprite getSprite(tile);

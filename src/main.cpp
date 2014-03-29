@@ -23,26 +23,26 @@ bool load_textures(tex* tex) {
     return true;
 }
 
-void handle_keys(sf::RenderWindow& window, float dt) {
+void handle_keys(sf::RenderTexture& texture, float dt) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        sf::View temp = window.getView();
+        sf::View temp = texture.getView();
         temp.move(-2 * dt/1000, 0);
-        window.setView(temp);
+        texture.setView(temp);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        sf::View temp = window.getView();
+        sf::View temp = texture.getView();
         temp.move(2 * dt/1000, 0);
-        window.setView(temp);
+        texture.setView(temp);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        sf::View temp = window.getView();
+        sf::View temp = texture.getView();
         temp.move(0, -2 * dt/1000);
-        window.setView(temp);
+        texture.setView(temp);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        sf::View temp = window.getView();
+        sf::View temp = texture.getView();
         temp.move(0, 2 * dt/1000);
-        window.setView(temp);
+        texture.setView(temp);
     }
 }
 
@@ -53,19 +53,23 @@ int main(int, char const**) {
         return EXIT_FAILURE;
     }
 
-    World world(textures);
+    World world(textures, 50, 50);
     sf::RenderWindow window(sf::VideoMode::getFullscreenModes()[0], "ISO-Engine", sf::Style::Fullscreen);
+    window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
 
-    sf::View middleView = window.getDefaultView();
-    middleView.move(-((int)window.getSize().x/2 - 10 * 64 / 2), -((int)window.getSize().y)/2 + 16);
-    window.setView(middleView);
+    sf::RenderTexture texture;
+    texture.create(window.getSize().x, window.getSize().y);
+
+    sf::View middleView = texture.getDefaultView();
+    middleView.move(-((int)texture.getSize().x/2 - 10 * 64 / 2), -((int)texture.getSize().y)/2 + 16);
+    texture.setView(middleView);
 
     sf::Clock clock;
 
     while (window.isOpen()) {
         sf::Time dt = clock.restart();
-        handle_keys(window, dt.asMicroseconds());
+        handle_keys(texture, dt.asMicroseconds());
 
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -75,7 +79,7 @@ int main(int, char const**) {
             if (event.type == sf::Event::MouseButtonPressed) {
                 switch (event.mouseButton.button) {
                     case sf::Mouse::Left:{
-                        sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                        sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
                         int row = tile::xy_to_row(coord.x, coord.y, 32);
                         int col = tile::xy_to_col(coord.x, coord.y, 32);
                         world.world_data[0][row][col] = {&(world.texture_data.sand), 30};
@@ -91,18 +95,18 @@ int main(int, char const**) {
                         window.close();
                         break;
                     case sf::Keyboard::Num0:
-                        window.setView(middleView);
+                        texture.setView(middleView);
                         break;
                     case sf::Keyboard::Z:{
-                        sf::View temp = window.getView();
+                        sf::View temp = texture.getView();
                         temp.zoom(0.8);
-                        window.setView(temp);
+                        texture.setView(temp);
                         break;
                     }
                     case sf::Keyboard::X:{
-                        sf::View temp = window.getView();
+                        sf::View temp = texture.getView();
                         temp.zoom(1.2);
-                        window.setView(temp);
+                        texture.setView(temp);
                         break;
                     }
                     default:
@@ -110,8 +114,14 @@ int main(int, char const**) {
                 }
             }
         }
+        texture.clear();
+        world.draw(texture);
+        texture.display();
+
+        sf::Sprite sprite(texture.getTexture());
+
         window.clear();
-        world.draw(window);
+        window.draw(sprite);
         window.display();
     }
     return EXIT_SUCCESS;

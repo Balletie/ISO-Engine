@@ -20,6 +20,10 @@ void Layer::fill(tile t) {
     }
 }
 
+int Layer::size() {
+    return layer_data.size();
+}
+
 std::vector<tile>& Layer::operator[](int i) {
     return layer_data[i];
 }

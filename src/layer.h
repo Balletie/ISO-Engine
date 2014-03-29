@@ -18,6 +18,7 @@ class Layer {
     const int tile_height;
     Layer(int, int, int height = 32);
     void fill(tile t);
+    int size();
     std::vector<tile>& operator [](int i);
     std::vector<tile>  operator [](int i) const;
 };
