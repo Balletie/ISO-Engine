@@ -21,7 +21,7 @@ class World {
     int y;
     std::vector<Layer> world_data;
     World(tex&, int, int);
-    void newLayer(int, int);
+    void addLayer(int, int, int height = 32);
     void draw(sf::RenderTexture& texture);
 
   private:
