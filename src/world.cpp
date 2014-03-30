@@ -16,6 +16,7 @@ World::World(tex& tex_data, int x, int y) : texture_data(tex_data)
     world_data[0].fill({&(texture_data.grass), 27});
     addLayer(20, 10, 44);
     world_data[1].fill({&(texture_data.building), 40});
+    world_data[0][30][10] = {&(texture_data.sand), 31};
 }
 
 sf::Sprite World::getSprite(tile a) {
@@ -36,8 +37,8 @@ void World::draw(sf::RenderTexture& texture) {
                 int tile_height = this->world_data[l].tile_height;
                 sf::Sprite sp   = this->getSprite(current);
 
-                int x = tile::rowcol_to_x(i,j, tile_height);
-                int y = tile::rowcol_to_y(i,j, tile_height);
+                int x = isoxy_to_standardx(i,j, tile_height);
+                int y = isoxy_to_standardy(i,j, tile_height);
 
                 sp.setPosition(x, y - current.y_offset);
                 texture.draw(sp);

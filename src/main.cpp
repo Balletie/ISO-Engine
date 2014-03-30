@@ -8,6 +8,7 @@
     #define resourcePath() std::string("assets/")
 #endif
 #include "tile.h"
+#include "transforms.h"
 #include "world.h"
 
 using namespace std;
@@ -74,26 +75,13 @@ int main(int, char const**) {
         sf::Event event;
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
-            int row = tile::xy_to_row(coord.x, coord.y, 32);
-            int col = tile::xy_to_col(coord.x, coord.y, 32);
-            world.world_data[0][row][col] = {&(world.texture_data.sand), 30};
+            int row = standardxy_to_isoy(coord.x, coord.y, 32);
+            int col = standardxy_to_isox(coord.x, coord.y, 32);
+            world.world_data[0][row][col] = {&(world.texture_data.sand), 31};
         }
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
-            }
-            if (event.type == sf::Event::MouseButtonPressed) {
-                switch (event.mouseButton.button) {
-                    case sf::Mouse::Left:{
-                        sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
-                        int row = tile::xy_to_row(coord.x, coord.y, 32);
-                        int col = tile::xy_to_col(coord.x, coord.y, 32);
-                        world.world_data[0][row][col] = {&(world.texture_data.sand), 30};
-                        break;
-                    }
-                    default:
-                        break;
-                }
             }
             if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {

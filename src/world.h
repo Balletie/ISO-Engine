@@ -13,6 +13,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include "layer.h"
+#include "transforms.h"
 
 class World {
   public:
