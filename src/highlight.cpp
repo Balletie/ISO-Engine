@@ -14,19 +14,20 @@ Highlighter::Highlighter(float x, float y) : x0(x)
                                            , active(false)
 {}
 
-sf::VertexArray Highlighter::operator()(float x, float y) {
+sf::VertexArray Highlighter::operator()(float x1, float y1) {
     sf::VertexArray selection(sf::Quads, 4);
-    float tempx0 = xy_to_tile_x(x0,y0,2);
-    float tempy0 = xy_to_tile_y(x0,y0,2);
-    float tempx = xy_to_tile_x(x, y, 2);
-    float tempy = xy_to_tile_y(x, y, 2);
+    float tilex0 = xy_to_tile_x(x0, y0, 2);
+    float tiley0 = xy_to_tile_y(x0, y0, 2);
+    float tilex1 = xy_to_tile_x(x1, y1, 2);
+    float tiley1 = xy_to_tile_y(x1, y1, 2);
     selection[0].position = sf::Vector2f(x0, y0);
-    selection[1].position = sf::Vector2f(tile_xy_to_x(tempx, tempy0, 2), tile_xy_to_y(tempx, tempy0, 2));
-    selection[2].position = sf::Vector2f(x, y);
-    selection[3].position = sf::Vector2f(tile_xy_to_x(tempx0, tempy, 2), tile_xy_to_y(tempx0, tempy, 2));
+    selection[1].position = sf::Vector2f(tile_xy_to_x(tilex0, tiley1, 2), -tile_xy_to_y(tilex0, tiley1, 2));
+    selection[2].position = sf::Vector2f(x1, y1);
+    selection[3].position = sf::Vector2f(tile_xy_to_x(tilex1, tiley0, 2), -tile_xy_to_y(tilex1, tiley0, 2));
     selection[0].color = sf::Color::Red;
     selection[1].color = sf::Color::Blue;
     selection[2].color = sf::Color::Green;
     selection[3].color = sf::Color::Yellow;
     return selection;
 }
+
