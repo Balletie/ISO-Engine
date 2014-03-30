@@ -72,6 +72,12 @@ int main(int, char const**) {
         handle_keys(texture, dt.asMicroseconds());
 
         sf::Event event;
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
+            int row = tile::xy_to_row(coord.x, coord.y, 32);
+            int col = tile::xy_to_col(coord.x, coord.y, 32);
+            world.world_data[0][row][col] = {&(world.texture_data.sand), 30};
+        }
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
