@@ -28,6 +28,9 @@ sf::VertexArray Highlighter::operator()(float x1, float y1) {
     selection[1].color = sf::Color::Blue;
     selection[2].color = sf::Color::Green;
     selection[3].color = sf::Color::Yellow;
+    for (int i = 0; i < 4; i++) {
+        selection[i].color.a = 175;
+    }
     return selection;
 }
 
