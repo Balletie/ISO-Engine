@@ -9,6 +9,7 @@
 #endif
 #include "tile.h"
 #include "transforms.h"
+#include "highlight.h"
 #include "world.h"
 
 using namespace std;
@@ -62,21 +63,18 @@ int main(int, char const**) {
     sf::RenderTexture texture;
     texture.create(window.getSize().x, window.getSize().y);
 
-    sf::View middleView = texture.getDefaultView();
-    middleView.move(-((int)texture.getSize().x/2 - 10 * 64 / 2), -((int)texture.getSize().y)/2 + 16);
-    texture.setView(middleView);
-
     sf::Clock clock;
+    Highlighter highlight(0, 0);
 
     while (window.isOpen()) {
         sf::Time dt = clock.restart();
         handle_keys(texture, dt.asMicroseconds());
 
         sf::Event event;
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
             sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
-            int row = standardxy_to_isoy(coord.x, coord.y, 32);
-            int col = standardxy_to_isox(coord.x, coord.y, 32);
+            int row = xy_to_tile_y(coord.x, coord.y, 32);
+            int col = xy_to_tile_x(coord.x, coord.y, 32);
             world.world_data[0][row][col] = {&(world.texture_data.sand), 31};
         }
         while (window.pollEvent(event)) {
@@ -89,7 +87,7 @@ int main(int, char const**) {
                         window.close();
                         break;
                     case sf::Keyboard::Num0:
-                        texture.setView(middleView);
+                        texture.setView(texture.getDefaultView());
                         break;
                     case sf::Keyboard::Z:{
                         sf::View temp = texture.getView();
@@ -107,9 +105,26 @@ int main(int, char const**) {
                         break;
                 }
             }
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    if(!highlight.active) {
+                        sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
+                        highlight.x0 = coord.x;
+                        highlight.y0 = coord.y;
+                        highlight.active = true;
+                    } else {
+                        highlight.active = false;
+                    }
+                }
+            }
         }
         texture.clear();
         world.draw(texture);
+        if (highlight.active) {
+            sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
+            sf::VertexArray selection = highlight(coord.x, coord.y);
+            texture.draw(selection);
+        }
         texture.display();
 
         sf::Sprite sprite(texture.getTexture());

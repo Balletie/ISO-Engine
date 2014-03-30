@@ -9,6 +9,15 @@
 #ifndef __iso_engine__highlight__
 #define __iso_engine__highlight__
 
-#include <iostream>
+#include <SFML/Graphics/VertexArray.hpp>
+#include "transforms.h"
+
+struct Highlighter {
+public:
+    bool active;
+    float x0, y0;
+    Highlighter(float, float);
+    sf::VertexArray operator()(float, float);
+};
 
 #endif /* defined(__iso_engine__highlight__) */

@@ -9,6 +9,18 @@
 #ifndef __iso_engine__transforms__
 #define __iso_engine__transforms__
 
+#include <SFML/System/Vector2.hpp>
+
+/////////////////////////////////////////////////
+/// \brief The isometric x-axis vector.
+/////////////////////////////////////////////////
+const sf::Vector2f b1 = sf::Vector2f(2,  1);
+
+/////////////////////////////////////////////////
+/// \brief The isometric y-axis vector.
+/////////////////////////////////////////////////
+const sf::Vector2f b2 = sf::Vector2f(2,  -1);
+
 /////////////////////////////////////////////////
 /// \brief Convert to standard basis
 ///
@@ -20,10 +32,10 @@
 /// The column vectors form the isometric basis
 /// representing the coordinate system.
 ///
-/// \see rowcol_to_y
+/// \see tile_xy_to_x
 /////////////////////////////////////////////////
-int isoxy_to_standardx(int, int, int);
-int isoxy_to_standardy(int, int, int);
+float tile_xy_to_x(float, float, float);
+float tile_xy_to_y(float, float, float);
 
 /////////////////////////////////////////////////
 /// \brief Convert to isometric basis
@@ -36,10 +48,10 @@ int isoxy_to_standardy(int, int, int);
 /// This matrix is the inverse of the previous
 /// matrix.
 ///
-/// \see xy_to_row
+/// \see xy_to_tile_y
 /////////////////////////////////////////////////
-int standardxy_to_isox(float, float, float);
-int standardxy_to_isoy(float, float, float);
+int xy_to_tile_x(float, float, float);
+int xy_to_tile_y(float, float, float);
 
 
 #endif /* defined(__iso_engine__transforms__) */

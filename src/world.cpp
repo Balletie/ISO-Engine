@@ -37,8 +37,8 @@ void World::draw(sf::RenderTexture& texture) {
                 int tile_height = this->world_data[l].tile_height;
                 sf::Sprite sp   = this->getSprite(current);
 
-                int x = isoxy_to_standardx(i,j, tile_height);
-                int y = isoxy_to_standardy(i,j, tile_height);
+                int x = tile_xy_to_x(i,j, tile_height);
+                int y = tile_xy_to_y(i,j, tile_height);
 
                 sp.setPosition(x, y - current.y_offset);
                 texture.draw(sp);
