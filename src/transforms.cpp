@@ -16,10 +16,10 @@ float tile_xy_to_y(float row, float col, float height) {
     return row * height/2 - col * height/2 - height/2;
 }
 
-int xy_to_tile_y(float x, float y, float height) {
-    return (int)(y / height + x / (2 * height));
+float xy_to_tile_y(float x, float y, float height) {
+    return y / height + x / (2 * height);
 }
 
-int xy_to_tile_x(float x, float y, float height) {
-    return (int)(x / (2 * height) - y / height);
+float xy_to_tile_x(float x, float y, float height) {
+    return x / (2 * height) - y / height;
 }

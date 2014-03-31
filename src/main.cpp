@@ -56,7 +56,7 @@ int main(int, char const**) {
     }
 
     World world(textures, 50, 50);
-    sf::RenderWindow window(sf::VideoMode::getFullscreenModes()[0], "ISO-Engine", sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(1280, 640), "ISO-Engine");
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
 
@@ -71,12 +71,6 @@ int main(int, char const**) {
         handle_keys(texture, dt.asMicroseconds());
 
         sf::Event event;
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-            sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
-            int row = xy_to_tile_y(coord.x, coord.y, 32);
-            int col = xy_to_tile_x(coord.x, coord.y, 32);
-            world.world_data[0][row][col] = {&(world.texture_data.sand), 31};
-        }
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
@@ -115,6 +109,11 @@ int main(int, char const**) {
                     } else {
                         highlight.active = false;
                     }
+                } else if (event.mouseButton.button == sf::Mouse::Right) {
+                    sf::Vector2f coord = texture.mapPixelToCoords(sf::Mouse::getPosition(window));
+                    int row = xy_to_tile_y(coord.x, coord.y, 32);
+                    int col = xy_to_tile_x(coord.x, coord.y, 32);
+                    world.world_data[0][row][col] = {&(world.texture_data.sand), 31};
                 }
             }
         }

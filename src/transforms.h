@@ -50,8 +50,8 @@ float tile_xy_to_y(float, float, float);
 ///
 /// \see xy_to_tile_y
 /////////////////////////////////////////////////
-int xy_to_tile_x(float, float, float);
-int xy_to_tile_y(float, float, float);
+float xy_to_tile_x(float, float, float);
+float xy_to_tile_y(float, float, float);
 
 
 #endif /* defined(__iso_engine__transforms__) */

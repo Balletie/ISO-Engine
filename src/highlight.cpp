@@ -24,10 +24,6 @@ sf::VertexArray Highlighter::operator()(float x1, float y1) {
     selection[1].position = sf::Vector2f(tile_xy_to_x(tilex0, tiley1, 2), -tile_xy_to_y(tilex0, tiley1, 2));
     selection[2].position = sf::Vector2f(x1, y1);
     selection[3].position = sf::Vector2f(tile_xy_to_x(tilex1, tiley0, 2), -tile_xy_to_y(tilex1, tiley0, 2));
-    selection[0].color = sf::Color::Red;
-    selection[1].color = sf::Color::Blue;
-    selection[2].color = sf::Color::Green;
-    selection[3].color = sf::Color::Yellow;
     for (int i = 0; i < 4; i++) {
         selection[i].color.a = 175;
     }
