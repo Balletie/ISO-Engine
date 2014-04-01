@@ -130,16 +130,16 @@ namespace window {
 
             cache.clear();
             world.draw(cache);
+            if (highlight.active) {
+                sf::Vector2f coord = cache.mapPixelToCoords(sf::Mouse::getPosition(window));
+                sf::VertexArray selection = highlight(coord.x, coord.y);
+                cache.draw(selection);
+            }
             cache.display();
             sf::Sprite sprite(cache.getTexture());
 
             window.clear();
             window.draw(sprite);
-            if (highlight.active) {
-                sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-                sf::VertexArray selection = highlight(coord.x, coord.y);
-                window.draw(selection);
-            }
             window.display();
         }
     }
