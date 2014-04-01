@@ -13,9 +13,11 @@
 #include "transforms.h"
 
 struct Highlighter {
-public:
+  public:
     bool active;
     float x0, y0;
+
+    Highlighter();
     Highlighter(float, float);
     sf::VertexArray operator()(float, float);
 };

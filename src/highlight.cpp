@@ -9,6 +9,11 @@
 #include "highlight.h"
 #include <iostream>
 
+Highlighter::Highlighter() : x0(0)
+                           , y0(0)
+                           , active(false)
+{}
+
 Highlighter::Highlighter(float x, float y) : x0(x)
                                            , y0(y)
                                            , active(false)

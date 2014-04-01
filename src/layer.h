@@ -16,6 +16,7 @@ class Layer {
     std::vector<std::vector<tile> > layer_data;
   public:
     const int tile_height;
+
     Layer(int, int, int height = 32);
     void fill(tile t);
     int size();
