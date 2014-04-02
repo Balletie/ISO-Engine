@@ -4,8 +4,12 @@
 GNU/Linux users can build the application using the following command:
 
 ````
-$ g++ -std=c++11 -o iso src/*.cpp -lsfml-graphics -lsfml-window -lsfml-system
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make install
 ````
+The executable can then be found in the root project directory.
 
 Users on OSX should build the application using XCode.
 
