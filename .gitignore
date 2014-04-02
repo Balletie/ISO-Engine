@@ -3,3 +3,4 @@ iso-engine-Info.plist
 *.o
 *.swp
 iso
+build/*
