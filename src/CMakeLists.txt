@@ -1,12 +1,7 @@
-cmake_minimum_required (VERSION 2.6)
- 
-project (ISO-Engine)
+file(GLOB SOURCES *.cpp)
 
-find_package (SFML REQUIRED)
-
-include_directories (${SFML_INCLUDE_DIR})
-
-add_definitions(-std=gnu++11)
-
-add_executable(iso main.cpp layer.cpp world.cpp transforms.cpp tile.cpp highlight.cpp)
+add_executable(iso ${SOURCES})
 target_link_libraries(iso sfml-window sfml-graphics sfml-system)
+add_definitions(-std=gnu++11)
+install(TARGETS iso RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/bin)
+
