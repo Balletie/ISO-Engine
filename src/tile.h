@@ -10,12 +10,6 @@
 #define __iso_engine__tile__
 #include <SFML/Graphics/Texture.hpp>
 #include <vector>
-#include <string>
-#if defined(SFML_SYSTEM_MACOS)
-    #include "OSX/ResourcePath.hpp"
-#elif defined(SFML_SYSTEM_LINUX)
-    #define resourcePath() std::string("assets/")
-#endif
 
 extern std::vector<sf::Texture> texture_data;
 

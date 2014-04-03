@@ -7,6 +7,12 @@
 //
 
 #include "tile.h"
+#if defined(SFML_SYSTEM_MACOS)
+    #include "OSX/ResourcePath.hpp"
+#elif defined(SFML_SYSTEM_LINUX)
+    #include <string>
+    #define resourcePath() std::string("assets/")
+#endif
 
 std::vector<sf::Texture> texture_data(5);
 
