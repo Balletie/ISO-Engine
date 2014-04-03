@@ -92,9 +92,8 @@ namespace window {
         window.create(sf::VideoMode(1280,768), "ISO-Engine");
         window.setVerticalSyncEnabled(true);
         window.setFramerateLimit(60);
-        if (!world.createCache())   return EXIT_FAILURE;
         if (!load_textures())       return EXIT_FAILURE;
-        loop();
+        if (!world.createCache())   return EXIT_FAILURE;
         return EXIT_SUCCESS;
     }
 

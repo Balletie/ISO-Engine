@@ -34,7 +34,8 @@ sf::Sprite World::getCache() {
 }
 
 bool World::createCache() {
-    bool success = cache.create(x, y);
+    bool success = cache.create(2048, 2048);
+    draw();
     return success;
 }
 

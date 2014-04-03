@@ -1,5 +1,7 @@
 #include "window.h"
 
 int main(int, char const**) {
-    return window::open();
+    if (window::open() == EXIT_FAILURE) return EXIT_FAILURE;
+    window::loop();
+    return EXIT_SUCCESS;
 }
