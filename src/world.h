@@ -18,13 +18,17 @@ class World {
   public:
     int x;
     int y;
-    std::vector<Layer> world_data;
 
     World(int, int);
     void addLayer(int, int, int height = 32);
-    void draw(sf::RenderTexture& texture);
+    void draw();
+    sf::Sprite getCache();
+    bool createCache();
+    Layer& operator [](int i);
+    Layer  operator [](int i) const;
 
   private:
+    std::vector<Layer> world_data;
     sf::Sprite getSprite(tile);
 };
 

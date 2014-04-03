@@ -8,6 +8,10 @@
 
 #include "world.h"
 
+namespace {
+    sf::RenderTexture cache;
+}
+
 World::World(int x, int y) : x(x * 64), y(y * 32)
                            , world_data(1, Layer(x, y))
 {
@@ -23,13 +27,25 @@ sf::Sprite World::getSprite(tile a) {
     else                          return sf::Sprite(texture_data[a.type]);
 }
 
+sf::Sprite World::getCache() {
+    sf::Sprite sprite(cache.getTexture());
+    sprite.move(0, -this->y / 2);
+    return sprite;
+}
+
+bool World::createCache() {
+    bool success = cache.create(x, y);
+    return success;
+}
+
 void World::addLayer(int x, int y, int height) {
     if (x * 2 * height > this->x)   this->x = x * 2 * height;
     if (y * height> this->y)        this->y = y * height;
     world_data.push_back(Layer(x, y, height));
 }
 
-void World::draw(sf::RenderTexture& texture) {
+void World::draw() {
+    cache.clear();
     for (int l = 0; l < world_data.size(); l++) {
         for (int i = 0; i < world_data[l].size(); i++) {
             for (int j = world_data[l][i].size() - 1; j >= 0; j--) {
@@ -41,8 +57,18 @@ void World::draw(sf::RenderTexture& texture) {
                 int coordy = tile_xy_to_y(i,j, tile_height);
 
                 sp.setPosition(coordx, coordy - current.y_offset + y/2);
-                texture.draw(sp);
+                cache.draw(sp);
             }
         }
     }
+    cache.display();
+}
+
+Layer& World::operator [](int i) {
+    draw();
+    return world_data[i];
+}
+
+Layer World::operator [](int i) const {
+    return world_data[i];
 }
