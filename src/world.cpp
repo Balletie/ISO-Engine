@@ -66,7 +66,7 @@ void World::draw() {
 }
 
 Layer& World::operator [](int i) {
-    draw();
+    redraw = true;
     return world_data[i];
 }
 

@@ -103,6 +103,7 @@ namespace window {
             handle_keys(dt.asMicroseconds());
             input();
 
+            if (world.redraw) world.draw();
             window.clear();
             window.draw(world.getCache());
             if (highlight.active) {
