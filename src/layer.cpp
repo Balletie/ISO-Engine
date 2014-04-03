@@ -24,6 +24,12 @@ int Layer::size() {
     return layer_data.size();
 }
 
+void Layer::set(int row, int col, tile t) {
+    if (row >= layer_data.size())       return;
+    if (col >= layer_data[row].size())  return;
+    layer_data[row][col] = t;
+}
+
 std::vector<tile>& Layer::operator[](int i) {
     return layer_data[i];
 }

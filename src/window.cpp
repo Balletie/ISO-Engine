@@ -59,7 +59,7 @@ namespace window {
                         sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
                         int row = xy_to_tile_y(coord.x, coord.y, 32);
                         int col = xy_to_tile_x(coord.x, coord.y, 32);
-                        world[0][row][col] = {SAND, 31};
+                        world.set(0, row, col, {SAND, 31});
                     }
                 }
             }
@@ -103,7 +103,6 @@ namespace window {
             handle_keys(dt.asMicroseconds());
             input();
 
-            if (world.redraw) world.draw();
             window.clear();
             window.draw(world.getCache());
             if (highlight.active) {

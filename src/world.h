@@ -18,10 +18,10 @@ class World {
   public:
     int x;
     int y;
-    bool redraw;
 
     World(int, int);
     void addLayer(int, int, int height = 32);
+    void set(int, int, int, tile);
     void draw();
     sf::Sprite getCache();
     bool createCache();

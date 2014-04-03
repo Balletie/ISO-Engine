@@ -12,6 +12,7 @@
 #include "tile.h"
 
 class Layer {
+  friend class World;
   private:
     std::vector<std::vector<tile> > layer_data;
   public:
@@ -20,6 +21,8 @@ class Layer {
     Layer(int, int, int height = 32);
     void fill(tile t);
     int size();
+    void set(int, int, tile);
+  protected:
     std::vector<tile>& operator [](int i);
     std::vector<tile>  operator [](int i) const;
 };

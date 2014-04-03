@@ -35,7 +35,7 @@ sf::Sprite World::getCache() {
 
 bool World::createCache() {
     bool success = cache.create(2048, 2048);
-    draw();
+    this->draw();
     return success;
 }
 
@@ -43,6 +43,12 @@ void World::addLayer(int x, int y, int height) {
     if (x * 2 * height > this->x)   this->x = x * 2 * height;
     if (y * height> this->y)        this->y = y * height;
     world_data.push_back(Layer(x, y, height));
+}
+
+void World::set(int layer, int row, int col, tile t) {
+    if (layer < 0 || layer >= world_data.size()) return;
+    world_data[layer].set(row, col, t);
+    this->draw();
 }
 
 void World::draw() {
@@ -66,7 +72,6 @@ void World::draw() {
 }
 
 Layer& World::operator [](int i) {
-    redraw = true;
     return world_data[i];
 }
 
