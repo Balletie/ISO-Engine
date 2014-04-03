@@ -8,6 +8,10 @@
 
 #ifndef __iso_engine__window__
 #define __iso_engine__window__
+#include <SFML/Graphics.hpp>
+#include "transforms.h"
+#include "highlight.h"
+#include "world.h"
 
 namespace window {
     int open();

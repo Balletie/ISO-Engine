@@ -8,7 +8,7 @@
 
 #include "layer.h"
 
-Layer::Layer(int x, int y, int height) : layer_data(std::vector< std::vector<tile> >(x, std::vector<tile>(y,{nullptr, 0})))
+Layer::Layer(int x, int y, int height) : layer_data(std::vector< std::vector<tile> >(x, std::vector<tile>(y,{UNKNOWN, 0})))
                                        , tile_height(height)
 {}
 

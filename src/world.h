@@ -9,7 +9,6 @@
 #ifndef __iso_engine__world__
 #define __iso_engine__world__
 
-#include <vector>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include "layer.h"
@@ -17,12 +16,11 @@
 
 class World {
   public:
-    tex& texture_data;
     int x;
     int y;
     std::vector<Layer> world_data;
 
-    World(tex&, int, int);
+    World(int, int);
     void addLayer(int, int, int height = 32);
     void draw(sf::RenderTexture& texture);
 

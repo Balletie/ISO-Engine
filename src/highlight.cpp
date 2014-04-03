@@ -7,7 +7,6 @@
 //
 
 #include "highlight.h"
-#include <iostream>
 
 Highlighter::Highlighter() : x0(0)
                            , y0(0)

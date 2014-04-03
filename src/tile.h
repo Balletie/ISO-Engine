@@ -2,22 +2,38 @@
 //  tile.h
 //  iso-engine
 //
-//  Created by Skip Lentz on 01/03/14.
+//  Created by Skip Lentz on 03/04/14.
 //  Copyright (c) 2014 ___bal___. All rights reserved.
 //
 
-#ifndef iso_engine_tile_h
-#define iso_engine_tile_h
-
-#include <SFML/Graphics/Sprite.hpp>
+#ifndef __iso_engine__tile__
+#define __iso_engine__tile__
 #include <SFML/Graphics/Texture.hpp>
+#include <vector>
+#include <string>
+#if defined(SFML_SYSTEM_MACOS)
+    #include "OSX/ResourcePath.hpp"
+#elif defined(SFML_SYSTEM_LINUX)
+    #define resourcePath() std::string("assets/")
+#endif
 
-struct tex {
-    sf::Texture grass, water, shallow, sand, rock, building;
+extern std::vector<sf::Texture> texture_data;
+
+enum tile_type {
+    UNKNOWN,
+    GRASS,
+    WATER,
+    SHALLOW,
+    SAND,
+    BUILDING,
+    NUM_TYPES
 };
 
 struct tile {
-    sf::Texture* texture;
+    tile_type type;
     int y_offset;
 };
-#endif
+
+bool load_textures();
+
+#endif /* defined(__iso_engine__tile__) */
