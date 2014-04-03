@@ -33,7 +33,7 @@ namespace window {
                         case sf::Keyboard::Z:{
                             sf::View temp = window.getView();
                             temp.zoom(0.8);
-                            cache.setView(temp);
+                            window.setView(temp);
                             break;
                         }
                         case sf::Keyboard::X:{
