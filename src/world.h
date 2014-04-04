@@ -29,6 +29,7 @@ class World {
     Layer  operator [](int i) const;
 
   private:
+    sf::RenderTexture cache;
     std::vector<Layer> world_data;
     sf::Sprite getSprite(tile);
 };

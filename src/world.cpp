@@ -8,10 +8,6 @@
 
 #include "world.h"
 
-namespace {
-    sf::RenderTexture cache;
-}
-
 World::World(int x, int y) : x(x * 64), y(y * 32)
                            , world_data(1, Layer(x, y))
 {
@@ -75,6 +71,6 @@ Layer& World::operator [](int i) {
     return world_data[i];
 }
 
-Layer World::operator [](int i) const {
+Layer  World::operator [](int i) const {
     return world_data[i];
 }

@@ -12,7 +12,7 @@
 #include "tile.h"
 
 class Layer {
-  friend class World;
+    friend class World;
   private:
     std::vector<std::vector<tile> > layer_data;
   public:
