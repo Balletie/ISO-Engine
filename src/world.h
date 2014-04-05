@@ -25,8 +25,6 @@ class World {
     void draw();
     sf::Sprite getCache();
     bool createCache();
-    Layer& operator [](int i);
-    Layer  operator [](int i) const;
 
   private:
     sf::RenderTexture cache;

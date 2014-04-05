@@ -66,11 +66,3 @@ void World::draw() {
     }
     cache.display();
 }
-
-Layer& World::operator [](int i) {
-    return world_data[i];
-}
-
-Layer  World::operator [](int i) const {
-    return world_data[i];
-}
