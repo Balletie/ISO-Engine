@@ -15,7 +15,32 @@ namespace window {
         Highlighter highlight;
         World world(50, 50);
 
-        void input() {
+        void handle_keys() {
+            float dt = clock.restart().asMicroseconds();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                sf::View temp = window.getView();
+                temp.move(-2 * dt/1000, 0);
+                window.setView(temp);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                sf::View temp = window.getView();
+                temp.move(2 * dt/1000, 0);
+                window.setView(temp);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                sf::View temp = window.getView();
+                temp.move(0, -2 * dt/1000);
+                window.setView(temp);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                sf::View temp = window.getView();
+                temp.move(0, 2 * dt/1000);
+                window.setView(temp);
+            }
+        }
+
+        void handle_input() {
+            handle_keys();
             sf::Event event;
             while (window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
@@ -31,13 +56,13 @@ namespace window {
                             break;
                         case sf::Keyboard::Z:{
                             sf::View temp = window.getView();
-                            temp.zoom(0.8);
+                            temp.zoom(0.5);
                             window.setView(temp);
                             break;
                         }
                         case sf::Keyboard::X:{
                             sf::View temp = window.getView();
-                            temp.zoom(1.2);
+                            temp.zoom(2);
                             window.setView(temp);
                             break;
                         }
@@ -64,32 +89,25 @@ namespace window {
                 }
             }
         }
-        void handle_keys(float dt) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                sf::View temp = window.getView();
-                temp.move(-2 * dt/1000, 0);
-                window.setView(temp);
+
+        void update() {
+            handle_input();
+        }
+
+        void draw() {
+            window.clear();
+            window.draw(world.getCache());
+            if (highlight.active) {
+                sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                sf::VertexArray selection = highlight(coord.x, coord.y);
+                window.draw(selection);
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                sf::View temp = window.getView();
-                temp.move(2 * dt/1000, 0);
-                window.setView(temp);
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                sf::View temp = window.getView();
-                temp.move(0, -2 * dt/1000);
-                window.setView(temp);
-            }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                sf::View temp = window.getView();
-                temp.move(0, 2 * dt/1000);
-                window.setView(temp);
-            }
+            window.display();
         }
     }
 
     int open() {
-        window.create(sf::VideoMode(1280,768), "ISO-Engine");
+        window.create(sf::VideoMode(1280,768), "ISO-Engine", sf::Style::Close | sf::Style::Titlebar);
         window.setVerticalSyncEnabled(true);
         window.setFramerateLimit(60);
         if (!load_textures())       return EXIT_FAILURE;
@@ -99,18 +117,8 @@ namespace window {
 
     void loop() {
         while (window.isOpen()) {
-            sf::Time dt = clock.restart();
-            handle_keys(dt.asMicroseconds());
-            input();
-
-            window.clear();
-            window.draw(world.getCache());
-            if (highlight.active) {
-                sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-                sf::VertexArray selection = highlight(coord.x, coord.y);
-                window.draw(selection);
-            }
-            window.display();
+            update();
+            draw();
         }
     }
 }
