@@ -26,8 +26,8 @@ const sf::Vector2f b2 = sf::Vector2f(2,  -1);
 ///
 /// Using the following matrix transformation:
 ///
-/// [  h    h  ] [ row ] -> [ x ]
-/// [ h/2 -h/2 ] [ col ] -> [ y ]
+/// [   h    h  ] [ x1 ] -> [ x ]
+/// [ -h/2  h/2 ] [ y1 ] -> [ y ]
 ///
 /// The column vectors form the isometric basis
 /// representing the coordinate system.
@@ -42,8 +42,8 @@ float tile_xy_to_y(float, float, float);
 ///
 /// Using the following matrix transformation:
 ///
-/// [ 1/2h  1/h ] [ x ] -> [ row ]
-/// [ 1/2h -1/h ] [ y ] -> [ col ]
+/// [ 1/2h  1/h ] [ x1 ] -> [ x ]
+/// [ 1/2h -1/h ] [ y1 ] -> [ y ]
 ///
 /// This matrix is the inverse of the previous
 /// matrix.

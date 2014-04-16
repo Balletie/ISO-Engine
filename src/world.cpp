@@ -50,8 +50,8 @@ void World::set(int layer, int row, int col, tile t) {
 void World::draw() {
     cache.clear();
     for (int l = 0; l < world_data.size(); l++) {
-        for (int i = 0; i < world_data[l].size(); i++) {
-            for (int j = world_data[l][i].size() - 1; j >= 0; j--) {
+        for (int i = world_data[l].size() - 1; i>=0; i--) {
+            for (int j = 0; j < world_data[l][i].size(); j++) {
                 tile current    = this->world_data[l][i][j];
                 int tile_height = this->world_data[l].tile_height;
                 sf::Sprite sp   = this->getSprite(current);
