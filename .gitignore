@@ -2,5 +2,6 @@ iso-engine-Info.plist
 *.gch
 *.o
 *.swp
+*.psd
 iso
 build/*

@@ -10,21 +10,29 @@
 #define __iso_engine__layer__
 
 #include "tile.h"
+#include "transforms.h"
+#include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
 
-class Layer {
+class Layer : public sf::Drawable {
     friend class World;
   private:
-    std::vector<std::vector<tile> > layer_data;
+    int x;
+    int y;
+    sf::Texture     tilemap;
+    sf::VertexArray layer_vertices;
   public:
     const int tile_height;
-
-    Layer(int, int, int height = 32);
+    Layer(int, int, sf::Texture, int height = 32);
     void fill(tile t);
     int size();
     void set(int, int, tile);
   protected:
-    std::vector<tile>& operator [](int i);
-    std::vector<tile>  operator [](int i) const;
+    virtual void draw(sf::RenderTarget&, sf::RenderStates) const override;
+    void setTilemap(sf::Texture);
+    sf::Vertex& operator [](int i);
+    sf::Vertex  operator [](int i) const;
 };
 
 #endif /* defined(__iso_engine__layer__) */

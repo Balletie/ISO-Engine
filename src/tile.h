@@ -16,9 +16,9 @@ extern std::vector<sf::Texture> texture_data;
 enum tile_type {
     UNKNOWN,
     GRASS,
+    SAND,
     WATER,
     SHALLOW,
-    SAND,
     BUILDING,
     NUM_TYPES
 };

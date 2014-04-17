@@ -13,7 +13,7 @@ namespace window {
         sf::Clock clock;
         sf::RenderWindow window;
         Highlighter highlight;
-        World world(50, 50);
+        World world(100, 100);
 
         void handle_keys() {
             float dt = clock.restart().asMicroseconds();
@@ -40,7 +40,6 @@ namespace window {
         }
 
         void handle_input() {
-            handle_keys();
             sf::Event event;
             while (window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
@@ -91,16 +90,16 @@ namespace window {
         }
 
         void update() {
+            handle_keys();
             handle_input();
         }
 
         void draw() {
             window.clear();
-            window.draw(world.getCache());
+            window.draw(world);
             if (highlight.active) {
                 sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-                sf::VertexArray selection = highlight(coord.x, coord.y);
-                window.draw(selection);
+                window.draw(highlight(coord.x, coord.y));
             }
             window.display();
         }

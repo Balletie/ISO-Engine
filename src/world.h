@@ -12,9 +12,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include "layer.h"
-#include "transforms.h"
 
-class World {
+class World : public sf::Drawable {
   public:
     int x;
     int y;
@@ -30,6 +29,9 @@ class World {
     sf::RenderTexture cache;
     std::vector<Layer> world_data;
     sf::Sprite getSprite(tile);
+
+protected:
+    virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
 
 #endif /* defined(__iso_engine__world__) */

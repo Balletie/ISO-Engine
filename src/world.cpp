@@ -8,13 +8,13 @@
 
 #include "world.h"
 
-World::World(int x, int y) : x(x * 64), y(y * 32)
-                           , world_data(1, Layer(x, y))
+World::World(int x1, int y1) : x(x1 * 64), y(y1 * 32)
+                           , world_data(1, Layer(x1, y1, sf::Texture(), 32))
 {
-    world_data[0].fill({GRASS, 27});
-    addLayer(20, 10, 44);
-    world_data[1].fill({BUILDING, 40});
-    world_data[0][30][10] = {SAND, 31};
+
+//    addLayer(20, 10, 44);
+//    world_data[1].fill({BUILDING, 40});
+//    world_data[0][30][10] = {SAND, 31};
 }
 
 sf::Sprite World::getSprite(tile a) {
@@ -31,38 +31,31 @@ sf::Sprite World::getCache() {
 
 bool World::createCache() {
     bool success = cache.create(2048, 2048);
-    this->draw();
+    world_data[0].setTilemap(texture_data[NUM_TYPES]);
+    world_data[0].fill({GRASS, 27});
+//    world_data[0].set(0,0,{GRASS,27});
+    cache.clear();
+    cache.draw(*this);
+    cache.display();
     return success;
 }
 
 void World::addLayer(int x, int y, int height) {
     if (x * 2 * height > this->x)   this->x = x * 2 * height;
     if (y * height> this->y)        this->y = y * height;
-    world_data.push_back(Layer(x, y, height));
+    world_data.push_back(Layer(x, y, texture_data[NUM_TYPES], height));
 }
 
 void World::set(int layer, int row, int col, tile t) {
     if (layer < 0 || layer >= world_data.size()) return;
     world_data[layer].set(row, col, t);
-    this->draw();
+    cache.clear();
+    cache.draw(*this);
+    cache.display();
 }
 
-void World::draw() {
-    cache.clear();
+void World::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     for (int l = 0; l < world_data.size(); l++) {
-        for (int i = world_data[l].size() - 1; i>=0; i--) {
-            for (int j = 0; j < world_data[l][i].size(); j++) {
-                tile current    = this->world_data[l][i][j];
-                int tile_height = this->world_data[l].tile_height;
-                sf::Sprite sp   = this->getSprite(current);
-
-                int coordx = tile_xy_to_x(i,j, tile_height);
-                int coordy = tile_xy_to_y(i,j, tile_height);
-
-                sp.setPosition(coordx, coordy - current.y_offset + y/2);
-                cache.draw(sp);
-            }
-        }
+        target.draw(world_data[l]);
     }
-    cache.display();
 }
