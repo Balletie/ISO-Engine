@@ -20,6 +20,7 @@ class World : public sf::Drawable {
 
     World(int, int);
     void addLayer(int, int, int height = 32);
+    void fillLayer(int, tile);
     void set(int, int, int, tile);
     void select(int, int, int);
     void draw();

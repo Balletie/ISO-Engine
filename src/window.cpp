@@ -111,6 +111,7 @@ namespace window {
         window.setFramerateLimit(60);
         if (!load_textures())       return EXIT_FAILURE;
         if (!world.createCache())   return EXIT_FAILURE;
+        world.addLayer(100, 100); world.fillLayer(0, {GRASS});
         return EXIT_SUCCESS;
     }
 

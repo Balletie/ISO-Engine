@@ -8,14 +8,9 @@
 
 #include "world.h"
 
-World::World(int x1, int y1) : x(x1 * 64), y(y1 * 32)
-                           , world_data(1, Layer(x1, y1, sf::Texture(), 32))
-{
-
-//    addLayer(20, 10, 44);
-//    world_data[1].fill({BUILDING, 40});
-//    world_data[0][30][10] = {SAND, 31};
-}
+World::World(int x1, int y1) : x(x1 * 64)
+                             , y(y1 * 32)
+{}
 
 sf::Sprite World::getSprite(tile a) {
     if (a.type == UNKNOWN)        return sf::Sprite();
@@ -31,9 +26,6 @@ sf::Sprite World::getCache() {
 
 bool World::createCache() {
     bool success = cache.create(2048, 2048);
-    world_data[0].setTilemap(texture_data[NUM_TYPES]);
-    world_data[0].fill({GRASS, 27});
-//    world_data[0].set(0,0,{GRASS,27});
     cache.clear();
     cache.draw(*this);
     cache.display();
@@ -44,6 +36,13 @@ void World::addLayer(int x, int y, int height) {
     if (x * 2 * height > this->x)   this->x = x * 2 * height;
     if (y * height> this->y)        this->y = y * height;
     world_data.push_back(Layer(x, y, texture_data[NUM_TYPES], height));
+}
+
+void World::fillLayer(int layer, tile t) {
+    if (layer < 0 || layer >= world_data.size()) {
+        return;
+    }
+    world_data[layer].fill(t);
 }
 
 void World::set(int layer, int row, int col, tile t) {

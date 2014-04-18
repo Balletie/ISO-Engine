@@ -54,7 +54,7 @@ void Layer::select(int i, int j) {
     sf::Vertex* quad = &layer_vertices[(x-i-1+j*x)*4];
     for (int i = 0; i < 4; i++) {
             quad[i].color = sf::Color::White;
-            quad[i].color.a = 100;
+            quad[i].color.a = 0;
     }
 }
 
@@ -76,12 +76,4 @@ void Layer::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     shader.setParameter("texture", sf::Shader::CurrentTexture);
     states.shader = &shader;
     target.draw(layer_vertices, states);
-}
-
-sf::Vertex& Layer::operator[](int i) {
-    return layer_vertices[i];
-}
-
-sf::Vertex  Layer::operator[](int i) const {
-    return layer_vertices[i];
 }

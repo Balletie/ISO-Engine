@@ -33,8 +33,6 @@ class Layer : public sf::Drawable {
   protected:
     virtual void draw(sf::RenderTarget&, sf::RenderStates) const override;
     void setTilemap(sf::Texture);
-    sf::Vertex& operator [](int i);
-    sf::Vertex  operator [](int i) const;
 };
 
 #endif /* defined(__iso_engine__layer__) */
