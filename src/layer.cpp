@@ -10,10 +10,21 @@
 
 Layer::Layer(int x, int y, sf::Texture tilemap, int height)
     : x(x), y(y)
-    , layer_vertices(sf::VertexArray(sf::Quads, 4*x*y))
+    , layer_vertices(sf::Quads, 4*x*y)
     , tilemap(tilemap)
     , tile_height(height)
-{}
+    , sel(new sf::Shader)
+{
+    std::string frag =  \
+    "uniform sampler2D texture;"\
+    "void main(){"\
+    "   vec4 tex = texture2D(texture, gl_TexCoord[0].xy);"\
+    "   vec4 outColor = tex + tex.a * gl_Color;"\
+    "   gl_FragColor = outColor * vec4(1.0,1.0,1.0,0.5);"\
+    "}";
+    sel->loadFromMemory(frag, sf::Shader::Fragment);
+    sel->setParameter("texture", sf::Shader::CurrentTexture);
+}
 
 void Layer::fill(tile t) {
     for (int i = x - 1; i>=0; i--) {
@@ -64,16 +75,6 @@ void Layer::setTilemap(sf::Texture t) {
 
 void Layer::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     states.texture = &tilemap;
-    sf::Shader shader;
-    std::string frag = \
-    "uniform sampler2D texture;"\
-    "void main(){"\
-    "   vec4 tex = texture2D(texture, gl_TexCoord[0].xy);"\
-    "   vec4 outColor = tex + tex.a * gl_Color;"\
-    "   gl_FragColor = outColor * vec4(1.0,1.0,1.0,0.5);"\
-    "}";
-    shader.loadFromMemory(frag, sf::Shader::Fragment);
-    shader.setParameter("texture", sf::Shader::CurrentTexture);
-    states.shader = &shader;
+    states.shader = sel.get();
     target.draw(layer_vertices, states);
 }

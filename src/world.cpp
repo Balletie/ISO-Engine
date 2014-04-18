@@ -8,8 +8,9 @@
 
 #include "world.h"
 
-World::World(int x1, int y1) : x(x1 * 64)
-                             , y(y1 * 32)
+World::World(int x1, int y1)
+    : x(x1 * 64)
+    , y(y1 * 32)
 {}
 
 sf::Sprite World::getSprite(tile a) {
