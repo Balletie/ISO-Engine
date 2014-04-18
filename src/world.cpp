@@ -13,12 +13,6 @@ World::World(int x1, int y1)
     , y(y1 * 32)
 {}
 
-sf::Sprite World::getSprite(tile a) {
-    if (a.type == UNKNOWN)        return sf::Sprite();
-    else if (a.type >= NUM_TYPES) return sf::Sprite();
-    else                          return sf::Sprite(texture_data[a.type]);
-}
-
 sf::Sprite World::getCache() {
     sf::Sprite sprite(cache.getTexture());
     sprite.move(0, -this->y / 2);

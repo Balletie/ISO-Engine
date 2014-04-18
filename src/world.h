@@ -23,7 +23,6 @@ class World : public sf::Drawable {
     void fillLayer(int, tile);
     void set(int, int, int, tile);
     void select(int, int, int);
-    void draw();
     sf::Sprite getCache();
     bool createCache();
 

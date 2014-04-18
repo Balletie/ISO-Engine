@@ -18,22 +18,26 @@
 
 class Layer : public sf::Drawable {
     friend class World;
+
   private:
     int x;
     int y;
-    std::shared_ptr<sf::Shader>     sel;
-    sf::Texture                     tilemap;
-    sf::VertexArray                 layer_vertices;
+    std::shared_ptr<sf::Shader> sel;
+    sf::Texture                 tilemap;
+    sf::VertexArray             layer_vertices;
+
   public:
     const int tile_height;
+
     Layer(int, int, sf::Texture, int height = 32);
     void fill(tile t);
     int size();
     void loadShader();
     void set(int, int, tile);
     void select(int, int);
+
   protected:
-    virtual void draw(sf::RenderTarget&, sf::RenderStates) const override;
+    virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
     void setTilemap(sf::Texture);
 };
 
