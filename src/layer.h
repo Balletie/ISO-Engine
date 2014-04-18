@@ -14,6 +14,7 @@
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
+#include <SFML/Graphics/Shader.hpp>
 
 class Layer : public sf::Drawable {
     friend class World;
@@ -28,6 +29,7 @@ class Layer : public sf::Drawable {
     void fill(tile t);
     int size();
     void set(int, int, tile);
+    void select(int, int);
   protected:
     virtual void draw(sf::RenderTarget&, sf::RenderStates) const override;
     void setTilemap(sf::Texture);

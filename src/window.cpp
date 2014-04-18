@@ -83,7 +83,7 @@ namespace window {
                         sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
                         int row = xy_to_tile_y(coord.x, coord.y, 32);
                         int col = xy_to_tile_x(coord.x, coord.y, 32);
-                        world.set(0, row, col, {SAND, 31});
+                        world.select(0, row, col);
                     }
                 }
             }
@@ -106,7 +106,7 @@ namespace window {
     }
 
     int open() {
-        window.create(sf::VideoMode(1280,768), "ISO-Engine", sf::Style::Close | sf::Style::Titlebar);
+        window.create(sf::VideoMode(1280, 786), "ISO-Engine", sf::Style::Close | sf::Style::Titlebar);
         window.setVerticalSyncEnabled(true);
         window.setFramerateLimit(60);
         if (!load_textures())       return EXIT_FAILURE;

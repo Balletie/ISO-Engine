@@ -21,6 +21,7 @@ class World : public sf::Drawable {
     World(int, int);
     void addLayer(int, int, int height = 32);
     void set(int, int, int, tile);
+    void select(int, int, int);
     void draw();
     sf::Sprite getCache();
     bool createCache();
