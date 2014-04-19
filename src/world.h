@@ -31,7 +31,7 @@ class World : public sf::Drawable {
     std::vector<Layer> world_data;
     sf::Sprite getSprite(tile);
 
-protected:
+  protected:
     virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
 };
 

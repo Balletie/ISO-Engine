@@ -65,7 +65,7 @@ void Layer::select(int i, int j) {
     sf::Vertex* quad = &layer_vertices[(x-i-1+j*x)*4];
     for (int i = 0; i < 4; i++) {
             quad[i].color = sf::Color::White;
-            quad[i].color.a = 0;
+            quad[i].color.a = 127;
     }
 }
 
