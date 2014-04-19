@@ -84,11 +84,11 @@ namespace window {
                             float col2 = xy_to_tile_x(coord.x, coord.y, 32);
                             int dif1 = col2 - col1;
                             int dif2 = row2 - row1;
+                            if (dif1 > 0) col2 = col1;
+                            if (dif2 > 0) row2 = row1;
                             for (int i = 0; i <= abs(dif1); i++) {
                                 for (int j = 0; j <= abs(dif2); j++) {
-                                    world.select(0,
-                                                 j+(dif2>0 ? row1 : row2),
-                                                 i+(dif1>0 ? col1 : col2));
+                                    world.select(0,j+row2,i+col2);
                                 }
                             }
                             highlight.active = false;

@@ -13,7 +13,7 @@ float tile_xy_to_x(float x, float y, float height) {
 }
 
 float tile_xy_to_y(float x, float y, float height) {
-    return -x * height/2 + y * height/2 - height/2;
+    return -x * height/2 + y * height/2 - height;
 }
 
 float xy_to_tile_x(float x, float y, float height) {
