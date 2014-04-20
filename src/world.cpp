@@ -56,9 +56,9 @@ void World::select(int layer, int row, int col) {
     cache.display();
 }
 
-void World::selectRange(int layer, int row1, int col1, int row2, int col2) {
+void World::selectRange(int layer, int start_row, int start_col, int end_row, int end_col) {
     if (layer < 0 || layer >= world_data.size()) return;
-    world_data[layer].selectRange(row1, col1, row2, col2);
+    world_data[layer].selectRange(start_row, start_col, end_row, end_col);
     cache.clear();
     cache.draw(*this);
     cache.display();
