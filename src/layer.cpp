@@ -28,7 +28,7 @@ Layer::Layer(int x, int y, sf::Texture tilemap, int height)
 
 void Layer::fill(tile t) {
     for (int i = 0; i<x; i++) {
-        for (int j = 0; j < y; j++) {
+        for (int j = 0; j<y; j++) {
             this->set(i, j, t);
         }
     }
@@ -69,14 +69,14 @@ void Layer::select(int i, int j) {
     }
 }
 
-void Layer::selectRange(int i, int j, int k, int l) {
-    int dif1 = l - j;
-    int dif2 = k - i;
-    if (dif1 > 0) l = j; else dif1 *= -1;
-    if (dif2 > 0) k = i; else dif2 *= -1;
+void Layer::selectRange(int start_row, int start_col, int end_row, int end_col) {
+    int dif1 = end_col - start_col;
+    int dif2 = end_row - start_row;
+    if (dif1 > 0) end_col = start_col; else dif1 *= -1;
+    if (dif2 > 0) end_row = start_row; else dif2 *= -1;
     for (int row = 0; row <= dif2; row++) {
         for (int col = 0; col <= dif1; col++) {
-            select(row+k,col+l);
+            select(row+end_row,col+end_col);
         }
     }
 }
