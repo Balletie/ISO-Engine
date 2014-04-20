@@ -35,6 +35,7 @@ class Layer : public sf::Drawable {
     void loadShader();
     void set(int, int, tile);
     void select(int, int);
+    void selectRange(int, int, int ,int);
 
   protected:
     virtual void draw(sf::RenderTarget&, sf::RenderStates) const;

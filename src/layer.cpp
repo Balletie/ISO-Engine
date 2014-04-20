@@ -27,7 +27,7 @@ Layer::Layer(int x, int y, sf::Texture tilemap, int height)
 }
 
 void Layer::fill(tile t) {
-    for (int i = x - 1; i>=0; i--) {
+    for (int i = 0; i<x; i++) {
         for (int j = 0; j < y; j++) {
             this->set(i, j, t);
         }
@@ -66,6 +66,18 @@ void Layer::select(int i, int j) {
     for (int i = 0; i < 4; i++) {
             quad[i].color = sf::Color::White;
             quad[i].color.a = 127;
+    }
+}
+
+void Layer::selectRange(int i, int j, int k, int l) {
+    int dif1 = l - j;
+    int dif2 = k - i;
+    if (dif1 > 0) l = j; else dif1 *= -1;
+    if (dif2 > 0) k = i; else dif2 *= -1;
+    for (int row = 0; row <= dif2; row++) {
+        for (int col = 0; col <= dif1; col++) {
+            select(row+k,col+l);
+        }
     }
 }
 

@@ -56,6 +56,14 @@ void World::select(int layer, int row, int col) {
     cache.display();
 }
 
+void World::selectRange(int layer, int row1, int col1, int row2, int col2) {
+    if (layer < 0 || layer >= world_data.size()) return;
+    world_data[layer].selectRange(row1, col1, row2, col2);
+    cache.clear();
+    cache.draw(*this);
+    cache.display();
+}
+
 void World::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     for (int l = 0; l < world_data.size(); l++) {
         target.draw(world_data[l]);

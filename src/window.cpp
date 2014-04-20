@@ -78,19 +78,10 @@ namespace window {
                             highlight.active = true;
                         } else {
                             sf::Vector2f coord = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-                            float row1 = xy_to_tile_y(highlight.x0, highlight.y0, 32);
-                            float col1 = xy_to_tile_x(highlight.x0, highlight.y0, 32);
-                            float row2 = xy_to_tile_y(coord.x, coord.y, 32);
-                            float col2 = xy_to_tile_x(coord.x, coord.y, 32);
-                            int dif1 = col2 - col1;
-                            int dif2 = row2 - row1;
-                            if (dif1 > 0) col2 = col1;
-                            if (dif2 > 0) row2 = row1;
-                            for (int i = 0; i <= abs(dif1); i++) {
-                                for (int j = 0; j <= abs(dif2); j++) {
-                                    world.select(0,j+row2,i+col2);
-                                }
-                            }
+                            world.selectRange(0, xy_to_tile_y(highlight.x0, highlight.y0, 32),
+                                                 xy_to_tile_x(highlight.x0, highlight.y0, 32),
+                                                 xy_to_tile_y(coord.x, coord.y, 32),
+                                                 xy_to_tile_x(coord.x, coord.y, 32));
                             highlight.active = false;
                         }
                     } else if (event.mouseButton.button == sf::Mouse::Right) {
