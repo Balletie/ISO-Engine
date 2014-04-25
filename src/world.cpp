@@ -27,10 +27,10 @@ bool World::createCache() {
     return success;
 }
 
-void World::addLayer(int x, int y, int height) {
+void World::addLayer(int x, int y, tileset set, int height) {
     if (x * 2 * height > this->x)   this->x = x * 2 * height;
     if (y * height> this->y)        this->y = y * height;
-    world_data.push_back(Layer(x, y, texture_data[NUM_TYPES], height));
+    world_data.push_back(Layer(x, y, tilesets[set], height));
 }
 
 void World::fillLayer(int layer, tile t) {

@@ -11,16 +11,21 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <vector>
 
-extern std::vector<sf::Texture> texture_data;
+extern std::vector<sf::Texture> tilesets;
 
 enum tile_type {
     UNKNOWN,
     GRASS,
     SAND,
-    WATER,
-    SHALLOW,
     BUILDING,
+    SHALLOW,
+    WATER,
     NUM_TYPES
+};
+
+enum tileset {
+    NATURE,
+    BUILDINGS
 };
 
 struct tile {
@@ -28,6 +33,6 @@ struct tile {
     int y_offset;
 };
 
-bool load_textures();
+bool load_tilesets();
 
 #endif /* defined(__iso_engine__tile__) */

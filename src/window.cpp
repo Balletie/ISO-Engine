@@ -114,9 +114,11 @@ namespace window {
         window.create(sf::VideoMode(1280, 786), "ISO-Engine", sf::Style::Close | sf::Style::Titlebar);
         window.setVerticalSyncEnabled(true);
         window.setFramerateLimit(60);
-        if (!load_textures())       return EXIT_FAILURE;
+        if (!load_tilesets())       return EXIT_FAILURE;
         if (!world.createCache())   return EXIT_FAILURE;
-        world.addLayer(100, 100); world.fillLayer(0, {GRASS});
+        world.addLayer(100, 100, NATURE);
+        world.fillLayer(0, {GRASS});
+        world.set(0,30,10,{WATER});
         return EXIT_SUCCESS;
     }
 
