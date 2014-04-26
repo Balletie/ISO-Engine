@@ -20,8 +20,8 @@ class Layer : public sf::Drawable {
     friend class World;
 
   private:
-    int x;
-    int y;
+    const int x;
+    const int y;
     std::shared_ptr<sf::Shader> sel;
     sf::Texture                 tilemap;
     sf::VertexArray             layer_vertices;
@@ -33,6 +33,7 @@ class Layer : public sf::Drawable {
     void fill(tile t);
     int size();
     void loadShader();
+
     void set(int, int, tile);
     void select(int, int);
     void selectRange(int, int, int ,int);

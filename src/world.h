@@ -19,13 +19,19 @@ class World : public sf::Drawable {
     int y;
 
     World(int, int);
+
     void addLayer(int, int, tileset, int height = 32);
     void fillLayer(int, tile);
+
     void set(int, int, int, tile);
     void select(int, int, int);
     void selectRange(int, int, int, int, int);
+
     sf::Sprite getCache();
     bool createCache();
+
+    void loadWorld(std::string);
+    void saveWorld(std::string);
 
   private:
     sf::RenderTexture cache;

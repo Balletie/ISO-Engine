@@ -27,6 +27,27 @@ bool World::createCache() {
     return success;
 }
 
+void World::loadWorld(std::string infile) {
+    sf::Image img;
+    img.loadFromFile(infile);
+    int sizex = img.getSize().x;
+    int sizey = img.getSize().y;
+    const uint8_t* pixels = img.getPixelsPtr();
+    this->world_data = std::vector<Layer>(4,Layer(sizex, sizey, tilesets[NATURE], 32));
+    for (int i = 0; i<sizex; i++) {
+        for (int j = 0; j<sizey; j++) {
+            for (int k = 0; k<4; k++) {
+                tile_type t = static_cast<tile_type>(pixels[i*sizex+j+k]);
+                this->world_data[k].set(i,j,{t});
+            }
+        }
+    }
+}
+
+void World::saveWorld(std::string infile) {
+    
+}
+
 void World::addLayer(int x, int y, tileset set, int height) {
     if (x * 2 * height > this->x)   this->x = x * 2 * height;
     if (y * height> this->y)        this->y = y * height;
