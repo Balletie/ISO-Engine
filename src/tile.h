@@ -13,7 +13,7 @@
 
 extern std::vector<sf::Texture> tilesets;
 
-enum tile_type {
+enum tile_type : uint8_t {
     UNKNOWN,
     GRASS,
     SAND,

@@ -7,6 +7,7 @@
 //
 
 #include "world.h"
+#include <iostream>
 
 World::World(int x1, int y1)
     : x(x1 * 64)
@@ -37,15 +38,33 @@ void World::loadWorld(std::string infile) {
     for (int i = 0; i<sizex; i++) {
         for (int j = 0; j<sizey; j++) {
             for (int k = 0; k<4; k++) {
-                tile_type t = static_cast<tile_type>(pixels[i*sizex+j+k]);
+                tile_type t = static_cast<tile_type>(255 - pixels[i*sizex*4+j*4+k]);
                 this->world_data[k].set(i,j,{t});
             }
         }
     }
 }
 
-void World::saveWorld(std::string infile) {
-    
+bool World::saveWorld(std::string infile) {
+    sf::Image img;
+    unsigned int sizex = x/64;
+    unsigned int sizey = y/32;
+    uint8_t* pixels = new uint8_t[sizex*sizey*4];
+    for (int i = 0; i<sizex; i++) {
+        for (int j = 0; j<sizey; j++) {
+            for (int k = 0; k<4; k++) {
+                if (k<world_data.size()) {
+                    pixels[i*sizex*4+j*4+k] = 255 - world_data[k].get(i,j).type;
+                } else {
+                    pixels[i*sizex*4+j*4+k] = 255;
+                }
+                pixels[i*sizex*4+j*4+3] = 255;
+            }
+        }
+    }
+    img.create(sizex, sizey, pixels);
+    delete [] pixels;
+    return img.saveToFile(infile);
 }
 
 void World::addLayer(int x, int y, tileset set, int height) {

@@ -22,9 +22,10 @@ class Layer : public sf::Drawable {
   private:
     const int x;
     const int y;
-    std::shared_ptr<sf::Shader> sel;
-    sf::Texture                 tilemap;
-    sf::VertexArray             layer_vertices;
+    std::shared_ptr<sf::Shader>     sel;
+    sf::Texture                     tilemap;
+    sf::VertexArray                 layer_vertices;
+    std::vector<std::vector<tile>>  layer_tiles;
 
   public:
     const int tile_height;
@@ -34,6 +35,7 @@ class Layer : public sf::Drawable {
     int size();
     void loadShader();
 
+    tile get(int, int);
     void set(int, int, tile);
     void select(int, int);
     void selectRange(int, int, int ,int);

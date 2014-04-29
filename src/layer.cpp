@@ -11,6 +11,7 @@
 Layer::Layer(int x, int y, sf::Texture tilemap, int height)
     : x(x), y(y)
     , layer_vertices(sf::Quads, 4*x*y)
+    , layer_tiles(x,std::vector<tile>(y))
     , tilemap(tilemap)
     , tile_height(height)
     , sel(new sf::Shader)
@@ -38,7 +39,12 @@ int Layer::size() {
     return layer_vertices.getVertexCount()/4;
 }
 
+tile Layer::get(int i, int j) {
+    return layer_tiles[i][j];
+}
+
 void Layer::set(int i, int j, tile t) {
+    layer_tiles[i][j] = t;
     int u = t.type%(tilemap.getSize().x/(2*tile_height));
     int v = t.type/(tilemap.getSize().x/(2*tile_height));
     int coordx = tile_xy_to_x(i, j, tile_height);

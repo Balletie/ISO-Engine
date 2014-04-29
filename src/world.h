@@ -31,7 +31,7 @@ class World : public sf::Drawable {
     bool createCache();
 
     void loadWorld(std::string);
-    void saveWorld(std::string);
+    bool saveWorld(std::string);
 
   private:
     sf::RenderTexture cache;
