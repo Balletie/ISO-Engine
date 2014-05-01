@@ -37,8 +37,8 @@ void World::loadWorld(std::string infile) {
     this->world_data = std::vector<Layer>(4,Layer(sizex, sizey, tilesets[NATURE], 32));
     for (int i = 0; i<sizex; i++) {
         for (int j = 0; j<sizey; j++) {
-            for (int k = 0; k<4; k++) {
-                tile_type t = static_cast<tile_type>(255 - pixels[i*sizex*4+j*4+k]);
+            for (int k = 0; k<3; k++) {
+                tile_type t = static_cast<tile_type>(pixels[i*sizex*4+j*4+k]/(255/NUM_TYPES));
                 this->world_data[k].set(i,j,{t});
             }
         }
@@ -52,14 +52,14 @@ bool World::saveWorld(std::string infile) {
     uint8_t* pixels = new uint8_t[sizex*sizey*4];
     for (int i = 0; i<sizex; i++) {
         for (int j = 0; j<sizey; j++) {
-            for (int k = 0; k<4; k++) {
+            for (int k = 0; k<3; k++) {
                 if (k<world_data.size()) {
-                    pixels[i*sizex*4+j*4+k] = 255 - world_data[k].get(i,j).type;
+                    pixels[i*sizex*4+j*4+k] = world_data[k].get(i,j).type*(255/NUM_TYPES);
                 } else {
-                    pixels[i*sizex*4+j*4+k] = 255;
+                    pixels[i*sizex*4+j*4+k] = 0;    //Must be set to zero,
                 }
-                pixels[i*sizex*4+j*4+3] = 255;
             }
+            pixels[i*sizex*4+j*4+3] = 255;
         }
     }
     img.create(sizex, sizey, pixels);

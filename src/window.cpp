@@ -116,12 +116,16 @@ namespace window {
         window.setFramerateLimit(60);
         if (!load_tilesets())       return EXIT_FAILURE;
         if (!world.createCache())   return EXIT_FAILURE;
-        world.loadWorld("/Users/Skip/test.png");
-/*        world.addLayer(100, 100, NATURE);
+//        world.loadWorld("/Users/Skip/test.png");
+        world.addLayer(100, 100, NATURE);
         world.fillLayer(0, {GRASS});
         world.set(0,98,99,{WATER});
         world.set(0,99,99,{SAND});
-        world.saveWorld("/Users/Skip/test.png");*/
+        world.addLayer(100, 100, NATURE);
+        world.set(1, 45, 40, {SHALLOW});
+        world.set(1, 45, 41, {SHALLOW});
+        world.set(1, 45, 42, {SHALLOW});
+        world.saveWorld("/Users/Skip/test.png");
         return EXIT_SUCCESS;
     }
 
