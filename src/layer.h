@@ -23,14 +23,14 @@ class Layer : public sf::Drawable {
     const int x;
     const int y;
     std::shared_ptr<sf::Shader>     sel;
-    sf::Texture                     tilemap;
+    tileset                         tset;
     sf::VertexArray                 layer_vertices;
     std::vector<std::vector<tile>>  layer_tiles;
 
   public:
     const int tile_height;
 
-    Layer(int, int, sf::Texture, int height = 32);
+    Layer(int, int, tileset, int height = 32);
     void fill(tile t);
     int size();
     void loadShader();

@@ -14,10 +14,11 @@
     #define resourcePath() std::string("assets/")
 #endif
 
-std::vector<sf::Texture> tilesets(1);
+std::vector<sf::Texture> tilesets(2);
 
 bool load_tilesets() {
     bool success = false;
-    success |= tilesets[NATURE].loadFromFile(resourcePath() + "nature.png");
+    success |= tilesets[NATURE]   .loadFromFile(resourcePath() + "nature.png");
+    success &= tilesets[BUILDINGS].loadFromFile(resourcePath() + "buildings.png");
     return success;
 }

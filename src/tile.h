@@ -14,13 +14,17 @@
 extern std::vector<sf::Texture> tilesets;
 
 enum tile_type : uint8_t {
-    UNKNOWN,
+    UNKNOWN = 0,
+
     GRASS,
     SAND,
-    BUILDING,
     SHALLOW,
     WATER,
-    NUM_TYPES
+    NUM_NATURE,
+
+    ONE_STORY,
+    TWO_STORY,
+    NUM_BUILDINGS
 };
 
 enum tileset {
@@ -29,8 +33,8 @@ enum tileset {
 };
 
 struct tile {
-    tile_type type;
-    int y_offset;
+    tile_type   type;
+    int         y_offset;
 };
 
 bool load_tilesets();

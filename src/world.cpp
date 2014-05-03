@@ -34,11 +34,11 @@ void World::loadWorld(std::string infile) {
     int sizex = img.getSize().x;
     int sizey = img.getSize().y;
     const uint8_t* pixels = img.getPixelsPtr();
-    this->world_data = std::vector<Layer>(4,Layer(sizex, sizey, tilesets[NATURE], 32));
+    this->world_data = std::vector<Layer>(4,Layer(sizex, sizey, NATURE, 32));
     for (int i = 0; i<sizex; i++) {
         for (int j = 0; j<sizey; j++) {
             for (int k = 0; k<3; k++) {
-                tile_type t = static_cast<tile_type>(pixels[i*sizex*4+j*4+k]/(255/NUM_TYPES));
+                tile_type t = static_cast<tile_type>(pixels[i*sizex*4+j*4+k]/(255/NUM_NATURE));
                 this->world_data[k].set(i,j,{t});
             }
         }
@@ -54,9 +54,9 @@ bool World::saveWorld(std::string infile) {
         for (int j = 0; j<sizey; j++) {
             for (int k = 0; k<3; k++) {
                 if (k<world_data.size()) {
-                    pixels[i*sizex*4+j*4+k] = world_data[k].get(i,j).type*(255/NUM_TYPES);
+                    pixels[i*sizex*4+j*4+k] = world_data[k].get(i,j).type*(255/NUM_NATURE);
                 } else {
-                    pixels[i*sizex*4+j*4+k] = 0;    //Must be set to zero,
+                    pixels[i*sizex*4+j*4+k] = 0;    //Must be set to zero, undefined behaviour otherwise
                 }
             }
             pixels[i*sizex*4+j*4+3] = 255;
@@ -70,7 +70,7 @@ bool World::saveWorld(std::string infile) {
 void World::addLayer(int x, int y, tileset set, int height) {
     if (x * 2 * height > this->x)   this->x = x * 2 * height;
     if (y * height> this->y)        this->y = y * height;
-    world_data.push_back(Layer(x, y, tilesets[set], height));
+    world_data.push_back(Layer(x, y, set, height));
 }
 
 void World::fillLayer(int layer, tile t) {

@@ -118,14 +118,13 @@ namespace window {
         if (!world.createCache())   return EXIT_FAILURE;
 //        world.loadWorld("/Users/Skip/test.png");
         world.addLayer(100, 100, NATURE);
-        world.fillLayer(0, {GRASS});
-        world.set(0,98,99,{WATER});
-        world.set(0,99,99,{SAND});
-        world.addLayer(100, 100, NATURE);
-        world.set(1, 45, 40, {SHALLOW});
-        world.set(1, 45, 41, {SHALLOW});
-        world.set(1, 45, 42, {SHALLOW});
-        world.saveWorld("/Users/Skip/test.png");
+        world.fillLayer(0, {GRASS,32});
+        world.set(0,98,99,{WATER,32});
+        world.set(0,99,99,{SAND,32});
+        world.addLayer(10, 10, BUILDINGS, 64);
+        world.set(1, 3, 4, {ONE_STORY});
+        world.set(1, 4, 4, {TWO_STORY});
+//        world.saveWorld("/Users/Skip/test.png");
         return EXIT_SUCCESS;
     }
 
