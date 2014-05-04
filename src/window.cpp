@@ -122,8 +122,7 @@ namespace window {
         world.set(0,98,99,{WATER,32});
         world.set(0,99,99,{SAND,32});
         world.addLayer(10, 10, BUILDINGS, 64);
-        world.set(1, 3, 4, {ONE_STORY});
-        world.set(1, 4, 4, {TWO_STORY});
+        world.fillLayer(1, {ONE_STORY,64});
 //        world.saveWorld("/Users/Skip/test.png");
         return EXIT_SUCCESS;
     }

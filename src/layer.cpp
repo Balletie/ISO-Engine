@@ -20,8 +20,12 @@ Layer::Layer(int x, int y, tileset tiles, int height)
     "uniform sampler2D texture;"\
     "void main(){"\
     "    vec4 tex = texture2D(texture, gl_TexCoord[0].xy);"\
-    "    vec4 outColor = tex + tex.a * gl_Color;"\
-    "    gl_FragColor = outColor * vec4(1.0,1.0,1.0,0.5);"\
+    "    float rgb = max(tex.r,max(tex.g, tex.b));"\
+    "    if(gl_Color.a > 0.0){"\
+    "        gl_FragColor = tex;"\
+    "    }else{"\
+    "        gl_FragColor = tex.a * vec4(rgb+.2, rgb+.2, rgb+.2, 1.0);"\
+    "    }"\
     "}";
     sel->loadFromMemory(frag, sf::Shader::Fragment);
     sel->setParameter("texture", sf::Shader::CurrentTexture);
@@ -77,8 +81,7 @@ void Layer::set(int i, int j, tile t) {
 void Layer::select(int i, int j) {
     sf::Vertex* quad = &layer_vertices[(x-i-1+j*x)*4];
     for (int i = 0; i < 4; i++) {
-            quad[i].color = sf::Color::White;
-            quad[i].color.a = 127;
+            quad[i].color.a = 0;
     }
 }
 
