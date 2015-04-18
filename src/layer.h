@@ -15,6 +15,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/Shader.hpp>
+#include <memory>
 
 class Layer : public sf::Drawable {
     friend class World;
